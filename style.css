@@ -109,235 +109,143 @@ body::after{
 }
 
 @keyframes glow{
-
-from{
-
-text-shadow:0 0 10px red;
-
-}
-
-to{
-
-text-shadow:
-0 0 20px red,
-0 0 40px red,
-0 0 80px red;
-
-}
-
+    from{
+        text-shadow:0 0 10px red;
+    }
+    to{
+        text-shadow:
+            0 0 20px red,
+            0 0 40px red,
+            0 0 80px red;
+    }
 }
 
 .profile p{
-
-margin-top:10px;
-color:#999;
-letter-spacing:2px;
-
+    margin-top:10px;
+    color:#999;
+    letter-spacing:2px;
 }
 
 /* Cards */
-
 .card{
-
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-padding:20px;
-
-margin-bottom:18px;
-
-background:rgba(255,255,255,.05);
-
-border:1px solid rgba(255,0,0,.25);
-
-border-radius:22px;
-
-backdrop-filter:blur(18px);
-
-text-decoration:none;
-
-color:#fff;
-
-transition:.35s;
-
-opacity:0;
-
-animation:fade .8s forwards;
-
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px;
+    margin-bottom:18px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,0,0,.25);
+    border-radius:22px;
+    backdrop-filter:blur(18px);
+    text-decoration:none;
+    color:#fff;
+    transition:.35s;
+    opacity:0;
+    animation:fade .8s forwards;
 }
-
 .card:nth-of-type(1){animation-delay:.15s;}
 .card:nth-of-type(2){animation-delay:.25s;}
 .card:nth-of-type(3){animation-delay:.35s;}
 .card:nth-of-type(4){animation-delay:.45s;}
-
 .card:hover{
-
-transform:translateY(-8px) scale(1.03);
-
-border-color:#ff0000;
-
-box-shadow:
-0 0 20px #ff000055,
-0 0 40px #ff000033;
-
+    transform:translateY(-8px) scale(1.03);
+    border-color:#ff0000;
+    box-shadow:
+    0 0 20px #ff000055,
+    0 0 40px #ff000033;
 }
 
 .icon{
-
-width:65px;
-height:65px;
-
-border-radius:18px;
-
-background:#101010;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:30px;
-
-color:#ff3d3d;
-
-transition:.3s;
-
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    background:#101010;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    color:#ff3d3d;
+    transition:.3s;
 }
-
 .card:hover .icon{
-
-transform:rotate(10deg) scale(1.1);
-
-box-shadow:0 0 20px red;
-
+    transform:rotate(10deg) scale(1.1);
+    box-shadow:0 0 20px red;
 }
 
 .text{
-
-flex:1;
-
-margin-left:20px;
-
+    flex:1;
+    margin-left:20px;
 }
 
 .text h2{
-
-font-size:22px;
-
-font-weight:600;
-
+    font-size:22px;
+    font-weight:600;
 }
 
 .text span{
-
-font-size:14px;
-
-color:#ff6666;
-
+    font-size:14px;
+    color:#ff6666;
 }
 
 .arrow{
-
-font-size:22px;
-
-color:#ff4444;
-
-transition:.3s;
-
+    font-size:22px;
+    color:#ff4444;
+    transition:.3s;
 }
 
 .card:hover .arrow{
-
-transform:translateX(8px);
-
+    transform:translateX(8px);
 }
 
 /* Footer */
 
 footer{
-
-margin-top:35px;
-
-text-align:center;
-
-color:#777;
-
-letter-spacing:2px;
-
-font-size:13px;
-
+    margin-top:35px;
+    text-align:center;
+    color:#777;
+    letter-spacing:2px;
+    font-size:13px;
 }
 
 /* Fade */
-
 @keyframes fade{
-
-from{
-
-opacity:0;
-transform:translateY(35px);
-
-}
-
-to{
-
-opacity:1;
-transform:translateY(0);
-
-}
-
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* Responsive */
-
 @media(max-width:600px){
+    .banner{
+        height:180px;
+    }
+    .logo{
+        width:120px;
+        height:120px;
+    }
+    .profile{
+        margin-top:-60px;
+    }
 
-.banner{
-
-height:180px;
-
-}
-
-.logo{
-
-width:120px;
-height:120px;
-
-}
-
-.profile{
-
-margin-top:-60px;
-
-}
-
-.profile h1{
-
-font-size:40px;
-
-letter-spacing:4px;
-
-}
-
-.card{
-
-padding:16px;
-
-}
-
-.icon{
-
-width:55px;
-height:55px;
-font-size:24px;
-
-}
-
-.text h2{
-
-font-size:18px;
-
-}
+    .profile h1{
+        font-size:40px;
+        letter-spacing:4px;
+    }
+    .card{
+        padding:16px;
+    }
+    .icon{
+        width:55px;
+        height:55px;
+        font-size:24px;
+    }
+    .text h2{
+        font-size:18px;
+    }
 
 }
