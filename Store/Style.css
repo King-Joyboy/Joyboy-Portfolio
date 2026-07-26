@@ -135,6 +135,65 @@ nav a:hover{
 section{
     padding:120px 8%;
 }
+/* Main Section Title (H1) */
+.section-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:75px;
+    text-align:center;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#fff;
+    margin-bottom:15px;
+    position:relative;
+    text-shadow:
+        0 0 10px rgba(255,0,0,.7),
+        0 0 25px rgba(255,0,0,.4);
+}
+
+.section-title::after{
+    content:"";
+    width:140px;
+    height:5px;
+    background:linear-gradient(90deg,#ff0000,#ff5555);
+    display:block;
+    margin:18px auto 0;
+    border-radius:20px;
+    box-shadow:0 0 20px red;
+}
+
+/* Description under title */
+.section-desc{
+    max-width:700px;
+    margin:0 auto 70px;
+    text-align:center;
+    color:#bdbdbd;
+    font-size:20px;
+    line-height:1.8;
+    font-weight:400;
+}
+
+/* Sub titles (Premiere / After Effects / Optimise / Windows) */
+.sub-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:70px 0 35px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:42px;
+    letter-spacing:2px;
+    color:#ff2d2d;
+    text-transform:uppercase;
+}
+
+.sub-title::before,
+.sub-title::after{
+    content:"";
+    width:80px;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#ff0000,transparent);
+}
+
 
 section h2{
     text-align:center;
@@ -267,6 +326,23 @@ footer p{
 
         font-size:17px;
 
+    }
+    .section-title{
+        font-size:55px;
+    }
+
+    .section-desc{
+        font-size:17px;
+        margin-bottom:50px;
+    }
+
+    .sub-title{
+        font-size:32px;
+    }
+
+    .sub-title::before,
+    .sub-title::after{
+        width:45px;
     }
     section h2{
         font-size:45px;
