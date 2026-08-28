@@ -3,95 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOYBOY</title>
-    <link rel="icon" type="image/jpg" href="./logo.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>JOYBOY | Official Portfolio</title>
+    <link rel="icon" type="image/jpg" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-ring"></div>
+            <div class="loader-text">JOYBOY</div>
+        </div>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- Main Content -->
+    <div class="container" id="main">
+
         <!-- Banner -->
-        <div class="banner">
-            <img src="banner.png" alt="Banner">
+        <div class="banner reveal">
+            <div class="banner-overlay"></div>
+            <img src="banner.gif" alt="JOYBOY Banner" loading="eager">
+            <div class="banner-glow"></div>
         </div>
 
-        <!-- Logo -->
-        <div class="profile">
-            <div class="logo">
-                <img src="logo.jpg" alt="Logo">
+        <!-- Profile Section -->
+        <div class="profile reveal">
+            <div class="logo-wrapper">
+                <div class="logo-ring-outer"></div>
+                <div class="logo-ring-inner"></div>
+                <div class="logo">
+                    <img src="logo.png" alt="JOYBOY Logo" loading="eager">
+                </div>
             </div>
-            <h1>JOYBOY</h1>
-            <p>Gaming • Editing • Content Creator</p>
+            <h1 class="glitch" data-text="JOYBOY">JOYBOY</h1>
+            <div class="tagline">
+                <span class="tagline-icon"><i class="fas fa-gamepad"></i></span>
+                <span>Gaming</span>
+                <span class="dot"></span>
+                <span class="tagline-icon"><i class="fas fa-film"></i></span>
+                <span>Editing</span>
+                <span class="dot"></span>
+                <span class="tagline-icon"><i class="fas fa-video"></i></span>
+                <span>Content Creator</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="4000">0</div>
+                    <div class="stat-label">TikTok</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="2000">0</div>
+                    <div class="stat-label">Instagram</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="450">0</div>
+                    <div class="stat-label">Discord Members</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Cards -->
+        <div class="cards-wrapper">
+
+            <!-- Store -->
+            <a href="Store/index.html" class="card reveal" rel="noopener">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon">
+                        <i class="fas fa-store"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Store</h2>
+                        <span>Joyboy Premium Store</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@king_joyboy17" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon tiktok">
+                        <i class="fab fa-tiktok"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>TikTok</h2>
+                        <span>@king_joyboy17</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/joyboy_120fps" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon instagram">
+                        <i class="fab fa-instagram"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Instagram</h2>
+                        <span>@joyboy_120fps</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/hg8tCag54G" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon discord">
+                        <i class="fab fa-discord"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Discord Server</h2>
+                        <span>JOYBOY Community</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@JoyBoy.120fps" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon youtube">
+                        <i class="fab fa-youtube"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>YouTube</h2>
+                        <span>JOYBOY 120FPS</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
 
         </div>
 
-        <!-- Store -->
-        <a href="Store/index.html" target="_blank" class="card">
-            <div class="icon">
-                <i class="fas fa-store"></i>
+        <!-- Footer -->
+        <footer class="reveal">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <div class="footer-brand">JOYBOY</div>
+                <div class="footer-socials">
+                    <a href="https://tiktok.com/@king_joyboy17" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://instagram.com/joyboy_120fps" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://discord.gg/hg8tCag54G" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@JoyBoy.120fps" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="footer-copy">&copy; 2026 JOYBOY &bull; All Rights Reserved</div>
             </div>
-            <div class="text">
-                <h2>Store</h2>
-                <span>Joyboy Store</span>
-            </div>
-            <i class="fas fa-angle-right arrow"></i>
-        </a>
-
-        <!-- TikTok -->
-        <a href="https://tiktok.com/@king_joyboy17" target="_blank" class="card">
-            <div class="icon">
-                <i class="fab fa-tiktok"></i>
-            </div>
-            <div class="text">
-                <h2>TikTok</h2>
-                <span>@king_joyboy17</span>
-            </div>
-            <i class="fas fa-angle-right arrow"></i>
-        </a>
-
-        <!-- Instagram -->
-        <a href="https://instagram.com/joyboy_120fps" target="_blank" class="card">
-            <div class="icon">
-                <i class="fab fa-instagram"></i>
-            </div>
-            <div class="text">
-                <h2>Instagram</h2>
-                <span>@joyboy_120fps</span>
-            </div>
-
-            <i class="fas fa-angle-right arrow"></i>
-        </a>
-
-        <!-- Discord -->
-        <a href="https://discord.gg/hg8tCag54G" target="_blank" class="card">
-            <div class="icon">
-                <i class="fab fa-discord"></i>
-            </div>
-            <div class="text">
-                <h2>Discord Server</h2>
-                <span>JOYBOY Community</span>
-            </div>
-            <i class="fas fa-angle-right arrow"></i>
-        </a>
-
-        <!-- YouTube -->
-        <a href="https://www.youtube.com/@JoyBoy.120fps" target="_blank" class="card">
-            <div class="icon">
-                <i class="fab fa-youtube"></i>
-            </div>
-            <div class="text">
-                <h2>YouTube</h2>
-                <span>JOYBOY 120FPS</span>
-            </div>
-            <i class="fas fa-angle-right arrow"></i>
-        </a>
-
-        <footer>
-            © 2026 JOYBOY • All Rights Reserved
         </footer>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ── Loading Screen ──
+        window.addEventListener('load', function() {
+            var loader = document.getElementById('loader');
+            setTimeout(function() {
+                loader.classList.add('hidden');
+                document.getElementById('main').classList.add('visible');
+            }, 1200);
+        });
+
+        // ── Particle System ──
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var mouse = { x: null, y: null };
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        window.addEventListener('mousemove', function(e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+
+            if (mouse.x !== null) {
+                var dx = mouse.x - this.x;
+                var dy = mouse.y - this.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    this.x -= dx * 0.02;
+                    this.y -= dy * 0.02;
+                }
+            }
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 40, 40, ' + this.opacity + ')';
+            ctx.fill();
+        };
+
+        var particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+        for (var i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (var a = 0; a < particles.length; a++) {
+                for (var b = a + 1; b < particles.length; b++) {
+                    var dx = particles[a].x - particles[b].x;
+                    var dy = particles[a].y - particles[b].y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255, 0, 0, ' + (0.15 * (1 - dist / 150)) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // ── Scroll Reveal ──
+        var reveals = document.querySelectorAll('.reveal');
+        function checkReveal() {
+            for (var i = 0; i < reveals.length; i++) {
+                var top = reveals[i].getBoundingClientRect().top;
+                if (top < window.innerHeight - 60) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('load', function() {
+            setTimeout(checkReveal, 1300);
+        });
+
+        // ── Counter Animation ──
+        function animateCounters() {
+            var counters = document.querySelectorAll('.stat-number');
+            for (var i = 0; i < counters.length; i++) {
+                var target = parseInt(counters[i].getAttribute('data-target'));
+                var current = 0;
+                var increment = target / 60;
+                var el = counters[i];
+                (function(el, target, increment) {
+                    var current = 0;
+                    function step() {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target + '+';
+                        } else {
+                            el.textContent = Math.floor(current) + '+';
+                            requestAnimationFrame(step);
+                        }
+                    }
+                    step();
+                })(el, target, increment);
+            }
+        }
+
+        var statsObserved = false;
+        var statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            var observer = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !statsObserved) {
+                    statsObserved = true;
+                    animateCounters();
+                }
+            }, { threshold: 0.5 });
+            observer.observe(statsSection);
+        }
+
+        // ── Tilt Effect on Cards ──
+        var cards = document.querySelectorAll('.card');
+        for (var i = 0; i < cards.length; i++) {
+            (function(card) {
+                card.addEventListener('mousemove', function(e) {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = (y - centerY) / 15;
+                    var rotateY = (centerX - x) / 15;
+                    card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            })(cards[i]);
+        }
+
+    })();
+    </script>
 
 </body>
 </html>
