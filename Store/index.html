@@ -1,351 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JOY BOY STORE</title>
-        <link rel="icon" type="image/jpg" href="./logo.jpg">
-        <link rel="stylesheet" href="./Style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>JOYBOY STORE | Premium Gaming Services</title>
+    <link rel="icon" type="image/jpg" href="../logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
 
-    </head>
-    
-    <body>
-        <header>
-            <div class="logo">JOY <span>BOY</span> STORE</div>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#quality-methods">Quality Method</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <a href="https://discord.gg/jHq6Ye6Qhj"class="discord-btn" target="_blank"><i class="fab fa-discord"></i>Discord</a>
-        </header>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-ring"></div>
+            <div class="loader-text">STORE</div>
+        </div>
+    </div>
 
-        <section class="hero">
-            <div class="hero-text">
-                <h1>PREMIUM GAMING SERVICES</h1>
-                <a href="#premiere" class="main-btn">Browse Services</a>
+    <!-- Particles -->
+    <canvas id="particles"></canvas>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="../index.html" class="logo-link">
+            <div class="logo">JOY <span>BOY</span></div>
+        </a>
+        <nav id="nav">
+            <a href="#hero">Home</a>
+            <a href="#quality-methods">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <a href="https://discord.gg/jHq6Ye6Qhj" class="discord-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <span>Discord</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#hero" class="mobile-nav-link">Home</a>
+        <a href="#quality-methods" class="mobile-nav-link">Services</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge reveal">PREMIUM QUALITY</div>
+            <h1 class="reveal">PREMIUM GAMING<br><span class="hero-accent">SERVICES</span></h1>
+            <p class="reveal">Professional editing presets, quality packs, and optimization methods for content creators.</p>
+            <div class="hero-actions reveal">
+                <a href="#quality-methods" class="main-btn">
+                    <i class="fas fa-arrow-down"></i>
+                    Browse Services
+                </a>
+                <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer" class="secondary-btn">
+                    <i class="fab fa-discord"></i>
+                    Join Community
+                </a>
             </div>
-        </section>
-
-        <!-- ===================== -->
-        <!-- QUALITY METHODS -->
-        <!-- ===================== -->
-
-        <section id="quality-methods">
-
-            <div class="section-title">
-                <h1>Quality Methods</h1>
-                <p>Professional Premiere Pro & After Effects Quality Packs</p>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <i class="fas fa-star"></i>
+                    <span>50+ Products</span>
+                </div>
+                <div class="hero-stat">
+                    <i class="fas fa-users"></i>
+                    <span>1000+ Clients</span>
+                </div>
+                <div class="hero-stat">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>Trusted Seller</span>
+                </div>
             </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
 
-             <!-- Premiere Pro --> 
-            <section class="quality">
+    <!-- Quality Methods -->
+    <section id="quality-methods">
+        <div class="section-header reveal">
+            <div class="section-tag">OUR SERVICES</div>
+            <h1 class="section-title">Quality Methods</h1>
+            <p class="section-desc">Professional Premiere Pro & After Effects quality packs crafted for elite content creators.</p>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="premiere">Premiere Pro</button>
+            <button class="filter-btn" data-filter="aftereffects">After Effects</button>
+            <button class="filter-btn" data-filter="packs">Packs</button>
+            <button class="filter-btn" data-filter="upload">Upload</button>
+        </div>
+
+        <!-- Premiere Pro -->
+        <section class="quality" data-category="premiere">
+            <div class="quality-header reveal">
+                <i class="fas fa-film"></i>
                 <h2>Premiere Pro</h2>
-                <div class="cards">
-                    <!-- PRODUCT TEMPLATE -->
-                    <div class="card">
+            </div>
+            <div class="cards">
+                <div class="card reveal">
+                    <div class="card-badge">POPULAR</div>
+                    <div class="preview">
+                        <img src="Quality/V1.jpg" alt="V1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V1</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/V1.jpg" alt="V1">
-                        </div>
                         <p>Professional Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V1.1.jpg" alt="V1.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V1.1</h3>
-                        <h4>23$</h4>
-                        <div class="preview">
-                            <img src="Quality/V1.1.jpg" alt="V1">
-                        </div>
                         <p>Old Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$23</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V2.jpg" alt="V2 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V2</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/V2.jpg" alt="V2">
-                        </div>
                         <p>Ultimate Version.</p>
-                        <a href="Rhttps://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V2.1.jpg" alt="V2.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V2.1</h3>
-                        <h4>20$</h4>
-                        <div class="preview">
-                            <img src="Quality/V2.1.jpg" alt="V2.1">
-                        </div>
                         <p>Professional Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$20</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V3.jpg" alt="V3 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V3</h3>
-                        <h4>23$</h4>
-                        <div class="preview">
-                            <img src="Quality/V3.jpg" alt="V3">
-                        </div>
                         <p>Premium Editing Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$23</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="card-badge hot">BEST</div>
+                    <div class="preview">
+                        <img src="Quality/V3.1.jpg" alt="V3.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V3.1</h3>
-                        <h4>29$</h4>
-                        <div class="preview">
-                            <img src="Quality/V3.1.jpg" alt="V3">
-                        </div>
                         <p>Premium Editing Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$29</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V4.jpg" alt="V4 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V4</h3>
-                        <h4>24$</h4>
-                        <div class="preview">
-                            <img src="Quality/V4.jpg" alt="V4">
-                        </div>
                         <p>Advanced Premiere Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$24</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V4.1.jpg" alt="V4.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V4.1</h3>
-                        <h4>20$</h4>
-                        <div class="preview">
-                            <img src="Quality/V4.1.jpg" alt="V4.1">
-                        </div>
                         <p>Updated Version.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$20</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="card-badge gift">GIFT</div>
+                    <div class="preview">
+                        <img src="Quality/V5.jpg" alt="V5 Gift Version" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-gift"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V5</h3>
-                        <h4>🎁 Gift</h4>
-                        <div class="preview">
-                            <img src="Quality/V5.jpg" alt="V5">
+                        <p>Special Gift when you buy more than one quality.</p>
+                        <div class="card-footer">
+                            <span class="price gift-price"><i class="fas fa-gift"></i> Gift</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Claim <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <p>Special Gift Version When You Buy More Than One  Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Claim</a>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V5.1.jpg" alt="V5.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V5.1</h3>
-                        <h4>15$</h4>
-                        <div class="preview">
-                            <img src="Quality/V5.1.jpg" alt="V5.1">
+                        <p>Optimized Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$15</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
                         </div>
-                        <p> Optimized Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V6.jpg" alt="V6 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V6</h3>
-                        <h4>10$</h4>
-                        <div class="preview">
-                            <img src="Quality/V6.jpg" alt="V6">
-                        </div>
                         <p>Budget Version.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$10</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V7.jpg" alt="V7 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V7</h3>
-                        <h4>20$</h4>
-                        <div class="preview">
-                            <img src="Quality/V7.jpg" alt="V7">
-                        </div>
                         <p>Professional Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$20</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V7.1.jpg" alt="V7.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V7.1</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/V7.1.jpg" alt="V7">
-                        </div>
                         <p>Best Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V8.jpg" alt="V8 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V8</h3>
-                        <h4>17$</h4>
-                        <div class="preview">
-                            <img src="Quality/V8.jpg" alt="V8">
-                        </div>
                         <p>Latest Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$17</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V8.1.jpg" alt="V8.1 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V8.1</h3>
-                        <h4>17$</h4>
-                        <div class="preview">
-                            <img src="Quality/V8.1.jpg" alt="V8.1">
-                        </div>
                         <p>Improved Quality.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$17</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/V8.2.jpg" alt="V8.2 Quality Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>V8.2</h3>
-                        <h4>17$</h4>
-                        <div class="preview">
-                            <img src="Quality/V8.2.jpg" alt="V8.2">
-                        </div>
                         <p>Optimized Version.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$17</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="card">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/effect.png" alt="Single Effect" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    </div>
+                    <div class="card-body">
                         <h3>Only 1 Effect</h3>
-                        <h4>1$</h4>
-                        <div class="preview">
-                            <img src="Quality/effect.png" alt="V8.2">
-                        </div>
                         <p>1 Effect Setting.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
+                        <div class="card-footer">
+                            <span class="price">$1</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-             <!-- After Effect --> 
-            <section class="quality">
-                <h2>After Effect</h2>
-                <div class="cards">
-                    <!-- PRODUCT TEMPLATE -->
-                    <div class="card">
-                        <h3>AE Best CC</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/After Effect Best CC.JPG" alt="V1">
-                        </div>
-                        <p>Professional Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>AE 4K CC</h3>
-                        <h4>20$</h4>
-                        <div class="preview">
-                            <img src="Quality/After Effect 4K CC.JPG" alt="V1">
-                        </div>
-                        <p>4K Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>AE COLD CC</h3>
-                        <h4>15$</h4>
-                        <div class="preview">
-                            <img src="Quality/After Cold CC.JPG" alt="V1">
-                        </div>
-                        <p>Cold Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>AE JOYBOY CC</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/After Cold CC.JPG" alt="V1">
-                        </div>
-                        <p>Joyboy Quality Method.</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-                </div>
-            </section>
-
-             <!-- Packs --> 
-            <section class="quality">
-                <h2>All My Packs</h2>
-                <div class="cards">
-                    <!-- PRODUCT TEMPLATE -->
-                    <div class="card">
-                        <h3>Premiere Pro Full Pack</h3>
-                        <h4>150$</h4>
-                        <div class="preview">
-                            <img src="Quality/Premiere Pro Pack.JPG" alt="V8.2">
-                        </div>
-                        <p>Contain +20 Quality + Effects And More...</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>After Effect Full Pack</h3>
-                        <h4>100$</h4>
-                        <div class="preview">
-                            <img src="Quality/After Effect Pack.JPG" alt="V8.2">
-                        </div>
-                        <p>Contain +100CC And Shakes/Zooms/Tranzition/And More...</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>Full Pack</h3>
-                        <h4>250$</h4>
-                        <div class="preview">
-                            <img src="Quality/Full Pack.JPG" alt="V8.2">
-                        </div>
-                        <p>Contain The Joyb Team Full Pack</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-                </div>
-            </section>
-
-             <!-- Upload Method --> 
-            <section class="quality">
-                <h2>Upload Mthod</h2>
-                <div class="cards">
-                    <!-- PRODUCT TEMPLATE -->
-                    <div class="card">
-                        <h3>Upload Method</h3>
-                        <h4>15$</h4>
-                        <div class="preview">
-                            <img src="Quality/upload 1080.png" alt="V8.2">
-                        </div>
-                        <p>1080p/60Fps Method..</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>Premium Upload Method</h3>
-                        <h4>20$</h4>
-                        <div class="preview">
-                            <img src="Quality/upload 2K.png" alt="V8.2">
-                        </div>
-                        <p>2K/90Fps Method..</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-
-                    <div class="card">
-                        <h3>Ultimate Upload Method</h3>
-                        <h4>25$</h4>
-                        <div class="preview">
-                            <img src="Quality/upload 4K.png" alt="V8.2">
-                        </div>
-                        <p>4K/120Fps Method..</p>
-                        <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank">Buy Now</a>
-                    </div>
-                </div>
-            </section>
-
+            </div>
         </section>
 
-        <footer id="contact">
-            <h2>JOIN OUR DISCORD</h2>
-            <p> Open a Ticket to Purchase </p>
-            <a href="https://discord.gg/jHq6Ye6Qhj"class="main-btn"target="_blank"><i class="fab fa-discord"></i>Open Ticket</a>
-        </footer>
+        <!-- After Effects -->
+        <section class="quality" data-category="aftereffects">
+            <div class="quality-header reveal">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <h2>After Effects</h2>
+            </div>
+            <div class="cards">
+                <div class="card reveal">
+                    <div class="card-badge">TOP</div>
+                    <div class="preview">
+                        <img src="Quality/After Effect Best CC.JPG" alt="AE Best CC" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AE Best CC</h3>
+                        <p>Professional Quality Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
 
-    </body>
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/After Effect 4K CC.JPG" alt="AE 4K CC" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AE 4K CC</h3>
+                        <p>4K Quality Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$20</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/After Cold CC.JPG" alt="AE Cold CC" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AE COLD CC</h3>
+                        <p>Cold Quality Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$15</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-badge hot">NEW</div>
+                    <div class="preview">
+                        <img src="Quality/After Cold CC.JPG" alt="AE Joyboy CC" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AE JOYBOY CC</h3>
+                        <p>Joyboy Quality Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packs -->
+        <section class="quality" data-category="packs">
+            <div class="quality-header reveal">
+                <i class="fas fa-box-open"></i>
+                <h2>All My Packs</h2>
+            </div>
+            <div class="cards">
+                <div class="card reveal">
+                    <div class="card-badge">VALUE</div>
+                    <div class="preview">
+                        <img src="Quality/Premiere Pro Pack.JPG" alt="Premiere Pro Full Pack" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Premiere Pro Full Pack</h3>
+                        <p>Contains 20+ Quality presets, effects and more.</p>
+                        <div class="card-footer">
+                            <span class="price">$150</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/After Effect Pack.JPG" alt="After Effects Full Pack" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>After Effect Full Pack</h3>
+                        <p>Contains 100+ CC, shakes, zooms, transitions and more.</p>
+                        <div class="card-footer">
+                            <span class="price">$100</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-badge hot">ULTIMATE</div>
+                    <div class="preview">
+                        <img src="Quality/Full Pack.JPG" alt="Full Pack" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-crown"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Full Pack</h3>
+                        <p>The complete Joyboy Team full pack.</p>
+                        <div class="card-footer">
+                            <span class="price">$250</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Method -->
+        <section class="quality" data-category="upload">
+            <div class="quality-header reveal">
+                <i class="fas fa-cloud-arrow-up"></i>
+                <h2>Upload Method</h2>
+            </div>
+            <div class="cards">
+                <div class="card reveal">
+                    <div class="preview">
+                        <img src="Quality/upload 1080.png" alt="Upload 1080p Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Upload Method</h3>
+                        <p>1080p / 60 FPS Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$15</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-badge">PRO</div>
+                    <div class="preview">
+                        <img src="Quality/upload 2K.png" alt="Premium Upload 2K Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Premium Upload Method</h3>
+                        <p>2K / 90 FPS Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$20</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <div class="card-badge hot">4K</div>
+                    <div class="preview">
+                        <img src="Quality/upload 4K.png" alt="Ultimate Upload 4K Method" loading="lazy">
+                        <div class="preview-overlay"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Ultimate Upload Method</h3>
+                        <p>4K / 120 FPS Method.</p>
+                        <div class="card-footer">
+                            <span class="price">$25</span>
+                            <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer">Buy Now <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="footer-inner">
+            <div class="footer-cta reveal">
+                <div class="footer-icon"><i class="fab fa-discord"></i></div>
+                <h2>JOIN OUR DISCORD</h2>
+                <p>Open a ticket to purchase any service or ask questions.</p>
+                <a href="https://discord.gg/jHq6Ye6Qhj" class="main-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-discord"></i>
+                    Open Ticket
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <a href="../index.html" class="footer-logo">JOY<span>BOY</span></a>
+                <div class="footer-copy">&copy; 2026 JOYBOY &bull; All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ── Loading Screen ──
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // ── Particles ──
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 0.3;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.4 + 0.1;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 30, 30, ' + this.opacity + ')';
+            ctx.fill();
+        };
+
+        var count = Math.min(60, Math.floor(window.innerWidth / 20));
+        for (var i = 0; i < count; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            // Connect nearby
+            for (var a = 0; a < particles.length; a++) {
+                for (var b = a + 1; b < particles.length; b++) {
+                    var dx = particles[a].x - particles[b].x;
+                    var dy = particles[a].y - particles[b].y;
+                    var d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255, 0, 0, ' + (0.08 * (1 - d / 120)) + ')';
+                        ctx.lineWidth = 0.4;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ── Scroll Reveal ──
+        var reveals = document.querySelectorAll('.reveal');
+        function checkReveal() {
+            for (var i = 0; i < reveals.length; i++) {
+                var top = reveals[i].getBoundingClientRect().top;
+                if (top < window.innerHeight - 50) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', checkReveal);
+        checkReveal();
+
+        // ── Header Scroll Effect ──
+        var header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ── Mobile Menu ──
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileNav = document.getElementById('mobileNav');
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+
+        var mobileLinks = mobileNav.querySelectorAll('a');
+        for (var i = 0; i < mobileLinks.length; i++) {
+            mobileLinks[i].addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        }
+
+        // ── Filter ──
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        var qualitySections = document.querySelectorAll('.quality');
+
+        for (var i = 0; i < filterBtns.length; i++) {
+            filterBtns[i].addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+
+                for (var j = 0; j < filterBtns.length; j++) {
+                    filterBtns[j].classList.remove('active');
+                }
+                this.classList.add('active');
+
+                for (var k = 0; k < qualitySections.length; k++) {
+                    var section = qualitySections[k];
+                    if (filter === 'all' || section.getAttribute('data-category') === filter) {
+                        section.style.display = '';
+                        section.style.animation = 'fadeUp 0.5s ease forwards';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // ── Back to Top ──
+        var backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 600) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ── Image Preview on Hover ──
+        var previews = document.querySelectorAll('.preview');
+        for (var i = 0; i < previews.length; i++) {
+            previews[i].addEventListener('click', function() {
+                var img = this.querySelector('img');
+                if (img) {
+                    var overlay = document.createElement('div');
+                    overlay.className = 'lightbox';
+                    overlay.innerHTML = '<div class="lightbox-inner"><img src="' + img.src + '" alt="' + img.alt + '"><button class="lightbox-close"><i class="fas fa-times"></i></button></div>';
+                    document.body.appendChild(overlay);
+                    setTimeout(function() { overlay.classList.add('active'); }, 10);
+                    overlay.addEventListener('click', function() {
+                        overlay.classList.remove('active');
+                        setTimeout(function() { overlay.remove(); }, 300);
+                    });
+                }
+            });
+        }
+
+    })();
+    </script>
+</body>
 </html>
