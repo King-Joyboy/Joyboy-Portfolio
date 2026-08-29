@@ -8,10 +8,20 @@
     <meta name="robots" content="index, follow">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <title>JOYBOY | Official Portfolio</title>
-    <link rel="icon" type="image/jpg" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Preload Critical Images -->
+    <link rel="preload" as="image" href="Banner.gif">
+    <link rel="preload" as="image" href="logo.png">
+
+    <!-- DNS Prefetch & Preconnect for CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -32,7 +42,7 @@
         <!-- Banner -->
         <div class="banner reveal">
             <div class="banner-overlay"></div>
-            <img src="Banner.gif" alt="JOYBOY Banner" loading="eager">
+            <img src="banner.gif" alt="JOYBOY Banner" loading="eager" decoding="async" fetchpriority="high">
             <div class="banner-glow"></div>
         </div>
 
@@ -42,7 +52,7 @@
                 <div class="logo-ring-outer"></div>
                 <div class="logo-ring-inner"></div>
                 <div class="logo">
-                    <img src="logo.png" alt="JOYBOY Logo" loading="eager">
+                    <img src="logo.png" alt="JOYBOY Logo" loading="eager" decoding="async" fetchpriority="high">
                 </div>
             </div>
             <h1 class="glitch" data-text="JOYBOY">JOYBOY</h1>
@@ -352,6 +362,20 @@
                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
                 });
             })(cards[i]);
+        }
+
+        // ── Image Fade-in on Load ──
+        var allImages = document.querySelectorAll('.banner img, .logo img');
+        for (var i = 0; i < allImages.length; i++) {
+            (function(img) {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        img.classList.add('loaded');
+                    });
+                }
+            })(allImages[i]);
         }
 
     })();
