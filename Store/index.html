@@ -26,11 +26,17 @@
 </head>
 
 <body>
-    <!-- Loading Screen -->
+    <!-- LOADING SCREEN -->
     <div class="loader" id="loader">
         <div class="loader-inner">
-            <div class="loader-ring"></div>
-            <div class="loader-text">STORE</div>
+            <div class="loader-circle-box">
+                <div class="loader-ring"></div>
+                <div class="loader-percentage" id="loader-percent">0%</div>
+            </div>
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill" id="loader-fill"></div>
+            </div>
+            <div class="loader-text">JOYBOY STORE</div>
         </div>
     </div>
 
@@ -736,6 +742,41 @@
         }
 
     })();
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("loader");
+    const loaderPercent = document.getElementById("loader-percent");
+    const loaderFill = document.getElementById("loader-fill");
+    const container = document.querySelector(".container");
+
+    let progress = 0;
+
+    // Simulate page loading progress from 0 to 100
+    const interval = setInterval(() => {
+        // Increases progress by a random amount for a natural load feel
+        progress += Math.floor(Math.random() * 5) + 2;
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+
+            // Update UI to 100%
+            loaderPercent.textContent = `100%`;
+            loaderFill.style.width = `100%`;
+
+            // Fade out loader and reveal content
+            setTimeout(() => {
+                loader.classList.add("hidden");
+                if (container) {
+                    container.classList.add("visible");
+                }
+            }, 400);
+        } else {
+            loaderPercent.textContent = `${progress}%`;
+            loaderFill.style.width = `${progress}%`;
+        }
+    }, 30);
+});
     </script>
 </body>
 </html>
