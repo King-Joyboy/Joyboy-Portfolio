@@ -1,0 +1,12 @@
+# Local backup of the original 4K media (not needed by the website).
+# It is kept out of the repository so GitHub Pages stays small.
+_unused/
+
+# Editor / assistant scratch files
+.qoder/
+_tmp*
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+desktop.ini

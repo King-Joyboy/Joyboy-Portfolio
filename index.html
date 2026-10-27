@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    
+    <title>JOYBOY | Official Portfolio</title>
+    <meta name="description" content="Official portfolio and links for JOYBOY — Gaming, Editing & Content Creation.">
+
+    <!-- Open Graph / Social Sharing Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="JOYBOY | Official Portfolio">
+    <meta property="og:description" content="Official portfolio and links for JOYBOY — Gaming, Editing & Content Creation.">
+    <meta property="og:image" content="logo-share.jpg">
+
+    <link rel="icon" type="image/png" href="favicon.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Preload the hero animation only (it is the largest contentful paint) -->
+    <link rel="preload" as="image" href="banner.webp" fetchpriority="high">
+
+    <!-- DNS Prefetch & Preconnect for CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-circle-box">
+                <div class="loader-ring"></div>
+                <div class="loader-percentage" id="loader-percent">0%</div>
+            </div>
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill" id="loader-fill"></div>
+            </div>
+            <div class="loader-text">JOYBOY</div>
+        </div>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <!-- Main Content -->
+    <main class="container" id="main">
+
+        <!-- Banner -->
+        <header class="banner reveal">
+            <div class="banner-overlay"></div>
+            <img src="banner.webp" alt="JOYBOY Banner" width="760" height="298" loading="eager" decoding="async" fetchpriority="high">
+            <div class="banner-glow"></div>
+        </header>
+
+        <!-- Profile Section -->
+        <section class="profile reveal">
+            <div class="logo-wrapper">
+                <div class="logo-ring-outer"></div>
+                <div class="logo-ring-inner"></div>
+                <div class="logo">
+                    <img src="logo.webp" alt="JOYBOY Logo" width="240" height="240" loading="eager" decoding="async">
+                </div>
+            </div>
+            <h1 class="glitch" data-text="JOYBOY">JOYBOY</h1>
+            <div class="tagline">
+                <span class="tagline-icon"><i class="fas fa-gamepad" aria-hidden="true"></i></span>
+                <span>Gaming</span>
+                <span class="dot" aria-hidden="true"></span>
+                <span class="tagline-icon"><i class="fas fa-film" aria-hidden="true"></i></span>
+                <span>Editing</span>
+                <span class="dot" aria-hidden="true"></span>
+                <span class="tagline-icon"><i class="fas fa-video" aria-hidden="true"></i></span>
+                <span>Content Creator</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats" aria-label="Social Stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="4500">0</div>
+                    <div class="stat-label">TikTok</div>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="6500">0</div>
+                    <div class="stat-label">Instagram</div>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="600">0</div>
+                    <div class="stat-label">Discord Members</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Cards -->
+        <nav class="cards-wrapper" aria-label="Social Media & Store Links">
+
+            <!-- Store -->
+            <a href="Store/index.html" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon store">
+                        <i class="fas fa-store" aria-hidden="true"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Store</h2>
+                        <span>Presets, Packs, Diamonds &amp; Nitro</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@king_joyboy17" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon tiktok">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>TikTok</h2>
+                        <span>@king_joyboy17</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/joyboy_120fps" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Instagram</h2>
+                        <span>@joyboy_120fps</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.gg/hg8tCag54G" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon discord">
+                        <i class="fab fa-discord" aria-hidden="true"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>Discord Server</h2>
+                        <span>JOYBOY Community</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@JoyBoy.120fps" target="_blank" rel="noopener noreferrer" class="card reveal">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="icon youtube">
+                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                        <div class="icon-pulse"></div>
+                    </div>
+                    <div class="text">
+                        <h2>YouTube</h2>
+                        <span>JOYBOY 120FPS</span>
+                    </div>
+                    <i class="fas fa-arrow-right arrow" aria-hidden="true"></i>
+                </div>
+                <div class="card-border"></div>
+            </a>
+
+        </nav>
+
+        <!-- Footer -->
+        <footer class="reveal">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <div class="footer-brand">JOYBOY</div>
+                <div class="footer-socials">
+                    <a href="https://tiktok.com/@king_joyboy17" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://instagram.com/joyboy_120fps" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://discord.gg/hg8tCag54G" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://www.youtube.com/@JoyBoy.120fps" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="footer-copy">&copy; 2026 JOYBOY &bull; All Rights Reserved</div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Background Music (portfolio only) -->
+    <audio id="bgMusic" src="song.mp3" loop preload="none"></audio>
+    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Pause background music">
+        <span class="music-icon"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span class="music-eq" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="music-label">Music</span>
+    </button>
+
+    <!-- Portfolio content (banner, profile photo, tagline, stats, links) -->
+    <script src="portfolio-data.js"></script>
+    <script src="portfolio.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ── Content ──
+        // Applied before anything is bound below, so the counters, the card
+        // tilt effect and the reveal observer all see the final markup.
+        window.JBPortfolio.mount(document);
+
+        // ── Loading Screen ──
+        var loader = document.getElementById('loader');
+        var loaderPercent = document.getElementById('loader-percent');
+        var loaderFill = document.getElementById('loader-fill');
+        var mainContent = document.getElementById('main');
+        var loadProgress = 0;
+        var loadDone = false;
+        var loadTick = null;
+
+        function finishLoading() {
+            if (loadDone) return;
+            loadDone = true;
+            if (loadTick) clearInterval(loadTick);
+            if (loaderPercent) loaderPercent.textContent = '100%';
+            if (loaderFill) loaderFill.style.width = '100%';
+            setTimeout(function() {
+                if (loader) loader.classList.add('hidden');
+                if (mainContent) mainContent.classList.add('visible');
+            }, 350);
+        }
+
+        loadTick = setInterval(function() {
+            loadProgress = Math.min(100, loadProgress + Math.floor(Math.random() * 5) + 3);
+            if (loaderPercent) loaderPercent.textContent = loadProgress + '%';
+            if (loaderFill) loaderFill.style.width = loadProgress + '%';
+            if (loadProgress >= 100) finishLoading();
+        }, 35);
+
+        window.addEventListener('load', function() {
+            setTimeout(finishLoading, 1200);
+        });
+        // Hard safety net: a slow or broken asset must never lock the page behind the loader
+        setTimeout(finishLoading, 6000);
+
+        // ── Particle System ──
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var mouse = { x: null, y: null };
+        var isAnimating = true;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize, { passive: true });
+
+        window.addEventListener('mousemove', function(e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        }, { passive: true });
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.8;
+            this.speedY = (Math.random() - 0.5) * 0.8;
+            this.opacity = Math.random() * 0.5 + 0.2;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+
+            if (mouse.x !== null) {
+                var dx = mouse.x - this.x;
+                var dy = mouse.y - this.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    this.x -= dx * 0.02;
+                    this.y -= dy * 0.02;
+                }
+            }
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 40, 40, ' + this.opacity + ')';
+            ctx.fill();
+        };
+
+        var particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+        for (var i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (var a = 0; a < particles.length; a++) {
+                for (var b = a + 1; b < particles.length; b++) {
+                    var dx = particles[a].x - particles[b].x;
+                    var dy = particles[a].y - particles[b].y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255, 0, 0, ' + (0.15 * (1 - dist / 150)) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            if (!isAnimating) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Pause animation when page is hidden to save performance
+        document.addEventListener('visibilitychange', function() {
+            isAnimating = !document.hidden;
+            if (isAnimating) animate();
+        });
+
+        // ── Scroll Reveal ──
+        var reveals = document.querySelectorAll('.reveal');
+        function checkReveal() {
+            for (var i = 0; i < reveals.length; i++) {
+                var top = reveals[i].getBoundingClientRect().top;
+                if (top < window.innerHeight - 60) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', checkReveal, { passive: true });
+        window.addEventListener('load', function() {
+            setTimeout(checkReveal, 1300);
+        });
+
+        // ── Counter Animation ──
+        function animateCounters() {
+            var counters = document.querySelectorAll('.stat-number');
+            for (var i = 0; i < counters.length; i++) {
+                var target = parseInt(counters[i].getAttribute('data-target'), 10);
+                var increment = target / 60;
+                var el = counters[i];
+                (function(el, target, increment) {
+                    var current = 0;
+                    function step() {
+                        current += increment;
+                        if (current >= target) {
+                            el.textContent = target.toLocaleString() + '+';
+                        } else {
+                            el.textContent = Math.floor(current).toLocaleString() + '+';
+                            requestAnimationFrame(step);
+                        }
+                    }
+                    step();
+                })(el, target, increment);
+            }
+        }
+
+        var statsObserved = false;
+        var statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            var observer = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !statsObserved) {
+                    statsObserved = true;
+                    animateCounters();
+                }
+            }, { threshold: 0.5 });
+            observer.observe(statsSection);
+        }
+
+        // ── Tilt Effect on Cards ──
+        var cards = document.querySelectorAll('.card');
+        for (var i = 0; i < cards.length; i++) {
+            (function(card) {
+                card.addEventListener('mousemove', function(e) {
+                    var rect = card.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = (y - centerY) / 15;
+                    var rotateY = (centerX - x) / 15;
+                    card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-5px)';
+                }, { passive: true });
+                card.addEventListener('mouseleave', function() {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            })(cards[i]);
+        }
+
+        // ── Image Fade-in on Load ──
+        var allImages = document.querySelectorAll('.banner img, .logo img');
+        for (var i = 0; i < allImages.length; i++) {
+            (function(img) {
+                if (img.complete) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', function() {
+                        img.classList.add('loaded');
+                    });
+                }
+            })(allImages[i]);
+        }
+
+        // ── Background Music ──
+        var bgMusic = document.getElementById('bgMusic');
+        var musicToggle = document.getElementById('musicToggle');
+        var musicMuted = false;
+        var musicUnlockArmed = false;
+
+        try {
+            musicMuted = window.localStorage.getItem('joyboyMusicMuted') === '1';
+        } catch (err) {
+            musicMuted = false;
+        }
+
+        function setMusicState(playing) {
+            if (!musicToggle) return;
+            musicToggle.classList.toggle('playing', playing);
+            musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+            musicToggle.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+        }
+
+        function saveMusicState() {
+            try {
+                window.localStorage.setItem('joyboyMusicMuted', musicMuted ? '1' : '0');
+            } catch (err) {
+                /* private mode - state simply is not remembered */
+            }
+        }
+
+        function armMusicUnlock() {
+            if (musicUnlockArmed) return;
+            musicUnlockArmed = true;
+
+            function unlock() {
+                document.removeEventListener('pointerdown', unlock);
+                document.removeEventListener('keydown', unlock);
+                document.removeEventListener('touchstart', unlock);
+                musicUnlockArmed = false;
+                playMusic();
+            }
+
+            document.addEventListener('pointerdown', unlock);
+            document.addEventListener('keydown', unlock);
+            document.addEventListener('touchstart', unlock);
+        }
+
+        function playMusic() {
+            if (!bgMusic || musicMuted) return;
+            var attempt = bgMusic.play();
+            if (attempt && typeof attempt.catch === 'function') {
+                attempt.catch(function() {
+                    // Browser blocked autoplay: start on the first user gesture instead.
+                    setMusicState(false);
+                    armMusicUnlock();
+                });
+            }
+        }
+
+        if (bgMusic && musicToggle) {
+            bgMusic.volume = 0.55;
+
+            // Only show the control once a real audio file is available.
+            bgMusic.addEventListener('loadedmetadata', function() {
+                musicToggle.classList.add('is-ready');
+            });
+            bgMusic.addEventListener('error', function() {
+                musicToggle.classList.remove('is-ready');
+            });
+            bgMusic.addEventListener('play', function() { setMusicState(true); });
+            bgMusic.addEventListener('pause', function() { setMusicState(false); });
+
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    musicMuted = false;
+                    playMusic();
+                } else {
+                    musicMuted = true;
+                    bgMusic.pause();
+                }
+                saveMusicState();
+            });
+
+            // Start after the page load so the 700 KB track never competes with
+            // the banner for bandwidth during the first paint.
+            if (document.readyState === 'complete') {
+                playMusic();
+            } else {
+                window.addEventListener('load', playMusic);
+            }
+        }
+
+    })();
+    </script>
+</body>
+</html>
