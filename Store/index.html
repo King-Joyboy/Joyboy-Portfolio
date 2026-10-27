@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>JOYBOY STORE | Premium Gaming Services</title>
+    <meta name="description" content="JOYBOY Store - Premiere Pro &amp; After Effects quality packs, transitions, Free Fire diamonds (100 = 5 DT) and Discord Nitro. Pay with Orange or Ooredoo recharge card, D17, bank transfer or Visa.">
+
+    <!-- Open Graph / Social Sharing Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="JOYBOY STORE | Premium Gaming Services">
+    <meta property="og:description" content="Premium quality packs, editing transitions, Free Fire diamonds and Discord Nitro. Pay with Orange or Ooredoo recharge card, D17, bank transfer or Visa.">
+    <meta property="og:image" content="../logo-share.jpg">
+
+    <link rel="icon" type="image/png" href="../favicon.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="../favicon.png">
+
+    <!-- Critical CSS is inline via style.css; product art is below the 100vh hero,
+         so it must NOT be preloaded (it would steal bandwidth from the first paint). -->
+
+    <!-- DNS Prefetch & Preconnect for CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-circle-box">
+                <div class="loader-ring"></div>
+                <div class="loader-percentage" id="loader-percent">0%</div>
+            </div>
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill" id="loader-fill"></div>
+            </div>
+            <div class="loader-text">JOYBOY STORE</div>
+        </div>
+    </div>
+
+    <!-- Particles -->
+    <canvas id="particles" aria-hidden="true"></canvas>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="../index.html" class="logo-link">
+            <div class="logo">JOY <span>BOY</span></div>
+        </a>
+        <nav id="nav">
+            <a href="#hero">Home</a>
+            <a href="#quality-methods">Services</a>
+            <a href="#diamonds">Diamonds</a>
+            <a href="#payment">Payment</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <a href="https://discord.gg/jHq6Ye6Qhj" class="discord-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                <span>Discord</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#hero" class="mobile-nav-link">Home</a>
+        <a href="#quality-methods" class="mobile-nav-link">Services</a>
+        <a href="#diamonds" class="mobile-nav-link">Diamonds</a>
+        <a href="#payment" class="mobile-nav-link">Payment</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge reveal">PREMIUM QUALITY</div>
+            <h1 class="reveal">PREMIUM GAMING<br><span class="hero-accent">SERVICES</span></h1>
+            <p class="reveal">Professional editing presets, quality packs, Free Fire diamonds and Discord upgrades for content creators.</p>
+            <div class="hero-actions reveal">
+                <a href="#quality-methods" class="main-btn">
+                    <i class="fas fa-arrow-down"></i>
+                    Browse Services
+                </a>
+                <a href="https://discord.gg/jHq6Ye6Qhj" target="_blank" rel="noopener noreferrer" class="secondary-btn">
+                    <i class="fab fa-discord"></i>
+                    Join Community
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <i class="fas fa-star"></i>
+                    <span>50+ Products</span>
+                </div>
+                <div class="hero-stat">
+                    <i class="fas fa-users"></i>
+                    <span>1000+ Clients</span>
+                </div>
+                <div class="hero-stat">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>Trusted Seller</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Catalogue. Every grid is filled by products.js from products-data.js,
+         so the staff panel can add, edit or delete products without touching HTML. -->
+    <section id="quality-methods">
+        <div class="section-header reveal">
+            <div class="section-tag">OUR SERVICES</div>
+            <h1 class="section-title">Quality Methods</h1>
+            <p class="section-desc">Professional Premiere Pro &amp; After Effects quality packs, Free Fire diamonds and Discord upgrades crafted for elite content creators.</p>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="premiere">Premiere Pro</button>
+            <button class="filter-btn" data-filter="aftereffects">After Effects</button>
+            <button class="filter-btn" data-filter="packs">Packs</button>
+            <button class="filter-btn" data-filter="diamond">Diamonds</button>
+            <button class="filter-btn" data-filter="discord">Discord</button>
+        </div>
+
+        <!-- Premiere Pro -->
+        <section class="quality" data-category="premiere">
+            <div class="quality-header reveal">
+                <i class="fas fa-film"></i>
+                <h2>Premiere Pro</h2>
+            </div>
+            <div class="cards" data-grid="premiere"></div>
+        </section>
+
+        <!-- After Effects -->
+        <section class="quality" data-category="aftereffects">
+            <div class="quality-header reveal">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <h2>After Effects</h2>
+            </div>
+            <div class="cards" data-grid="aftereffects"></div>
+        </section>
+
+        <!-- Packs -->
+        <section class="quality" data-category="packs">
+            <div class="quality-header reveal">
+                <i class="fas fa-box-open"></i>
+                <h2>All My Packs</h2>
+            </div>
+            <div class="cards" data-grid="packs"></div>
+        </section>
+
+        <!-- Free Fire Diamonds -->
+        <section class="quality" id="diamonds" data-category="diamond">
+            <div class="quality-header reveal">
+                <i class="fas fa-gem"></i>
+                <h2>Free Fire Diamonds</h2>
+            </div>
+            <div class="diamond-note reveal">
+                <i class="fas fa-circle-info"></i>
+                <span>Official top-up &bull; Delivered in 5-15 minutes &bull; Prices in Tunisian Dinar (DT)</span>
+            </div>
+            <div class="cards" data-grid="diamond"></div>
+        </section>
+
+        <!-- Discord -->
+        <section class="quality" id="discord" data-category="discord">
+            <div class="quality-header reveal">
+                <i class="fab fa-discord"></i>
+                <h2>Discord</h2>
+            </div>
+            <div class="diamond-note reveal">
+                <i class="fas fa-circle-info"></i>
+                <span>Nitro &amp; server boosts &bull; Activated on your account in a few minutes &bull; Prices in USD ($)</span>
+            </div>
+            <div class="cards" data-grid="discord"></div>
+        </section>
+    </section>
+
+    <!-- Payment Methods -->
+    <section id="payment" class="payment">
+        <div class="section-header reveal">
+            <div class="section-tag">PAYMENT METHODS</div>
+            <h1 class="section-title">How To Pay</h1>
+            <p class="section-desc">Pay with any method below, then send the receipt to our Discord ticket. A moderator verifies it and delivers your order.</p>
+        </div>
+
+        <div class="payment-grid">
+            <div class="payment-card reveal">
+                <div class="payment-icon orange"><i class="fas fa-mobile-screen-button"></i></div>
+                <h3>Orange</h3>
+                <span class="payment-tag">Carte de recharge</span>
+                <p>Buy an Orange recharge card covering the order plus the fee, then send the card code in your ticket.</p>
+                <div class="payment-detail">Carte de recharge Orange</div>
+                <div class="payment-fee"><i class="fas fa-plus"></i> 25% fees on the order amount</div>
+            </div>
+
+            <div class="payment-card reveal">
+                <div class="payment-icon ooredoo"><i class="fas fa-sim-card"></i></div>
+                <h3>Ooredoo</h3>
+                <span class="payment-tag">Carte de recharge</span>
+                <p>Same as Orange - buy an Ooredoo recharge card covering the order plus the fee and send the code.</p>
+                <div class="payment-detail">Carte de recharge Ooredoo</div>
+                <div class="payment-fee"><i class="fas fa-plus"></i> 25% fees on the order amount</div>
+            </div>
+
+            <div class="payment-card reveal">
+                <div class="payment-icon d17"><i class="fas fa-wallet"></i></div>
+                <h3>D17</h3>
+                <span class="payment-tag">La Poste Tunisienne</span>
+                <p>Top up the D17 wallet below and keep the transaction ID. No extra fees.</p>
+                <div class="payment-detail">23621140</div>
+            </div>
+
+            <div class="payment-card reveal">
+                <div class="payment-icon bank"><i class="fas fa-building-columns"></i></div>
+                <h3>Virement Bancaire</h3>
+                <span class="payment-tag">Bank Transfer</span>
+                <p>Bank transfer (virement) - account details sent with the ticket if needed.</p>
+                <!-- EDIT: replace the text below with your real RIB / IBAN when ready -->
+                <div class="payment-detail">Details in Discord ticket</div>
+            </div>
+
+            <div class="payment-card reveal">
+                <div class="payment-icon visa"><i class="fab fa-cc-visa"></i></div>
+                <h3>Visa / Mastercard</h3>
+                <span class="payment-tag">Card Payment</span>
+                <p>Secure card payment link, sent inside your Discord ticket on request.</p>
+                <div class="payment-detail">Link delivered via Discord</div>
+            </div>
+        </div>
+
+        <!-- Recharge card fee calculator (Orange & Ooredoo) -->
+        <div class="fee-calc reveal">
+            <div class="fee-calc-head">
+                <i class="fas fa-calculator"></i>
+                <span>Orange / Ooredoo recharge card fee</span>
+            </div>
+            <label for="feeAmount">Your order amount (DT)</label>
+            <div class="fee-calc-row">
+                <input id="feeAmount" type="number" min="1" step="0.5" value="20" inputmode="decimal">
+                <div class="fee-calc-out">Buy a card of <strong id="feeResult">25 DT</strong></div>
+            </div>
+            <p class="fee-calc-note">Recharge cards are charged <strong>+25%</strong>, so a 20 DT order needs a 25 DT card.</p>
+        </div>
+
+        <div class="payment-steps">
+            <div class="step reveal">
+                <span class="step-num">01</span>
+                <h4>Open a ticket</h4>
+                <p>Tell us the product, diamond pack or Discord upgrade you want to buy.</p>
+            </div>
+            <div class="step reveal">
+                <span class="step-num">02</span>
+                <h4>Pay</h4>
+                <p>Orange or Ooredoo recharge card (+25% fee), D17, virement or Visa - keep the receipt.</p>
+            </div>
+            <div class="step reveal">
+                <span class="step-num">03</span>
+                <h4>Get delivered</h4>
+                <p>Send the receipt to the ticket - your order is delivered right after verification.</p>
+            </div>
+        </div>
+
+        <div class="payment-cta reveal">
+            <a href="https://discord.gg/jHq6Ye6Qhj" class="main-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+                Pay &amp; Confirm on Discord
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="footer-inner">
+            <div class="footer-cta reveal">
+                <div class="footer-icon"><i class="fab fa-discord"></i></div>
+                <h2>JOIN OUR DISCORD</h2>
+                <p>Open a ticket to purchase any service or ask questions.</p>
+                <a href="https://discord.gg/jHq6Ye6Qhj" class="main-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-discord"></i>
+                    Open Ticket
+                </a>
+            </div>
+            <div class="footer-bottom">
+                <a href="../index.html" class="footer-logo">JOY<span>BOY</span></a>
+                <div class="footer-copy">&copy; 2026 JOYBOY &bull; All Rights Reserved</div>
+                <a href="admin.html" class="footer-staff" rel="nofollow"><i class="fas fa-lock"></i> Staff</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Data + JavaScript -->
+    <script src="products-data.js"></script>
+    <script src="products.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // ── Loading Screen ──
+        var loader = document.getElementById('loader');
+        var loaderPercent = document.getElementById('loader-percent');
+        var loaderFill = document.getElementById('loader-fill');
+        var loadProgress = 0;
+        var loadDone = false;
+        var loadTick = null;
+
+        function finishLoading() {
+            if (loadDone) return;
+            loadDone = true;
+            if (loadTick) clearInterval(loadTick);
+            if (loaderPercent) loaderPercent.textContent = '100%';
+            if (loaderFill) loaderFill.style.width = '100%';
+            setTimeout(function() {
+                if (loader) loader.classList.add('hidden');
+            }, 300);
+        }
+
+        loadTick = setInterval(function() {
+            loadProgress = Math.min(100, loadProgress + Math.floor(Math.random() * 5) + 3);
+            if (loaderPercent) loaderPercent.textContent = loadProgress + '%';
+            if (loaderFill) loaderFill.style.width = loadProgress + '%';
+            if (loadProgress >= 100) finishLoading();
+        }, 35);
+
+        window.addEventListener('load', function() {
+            setTimeout(finishLoading, 900);
+        });
+        // Hard safety net: a slow or broken asset must never lock the page behind the loader
+        setTimeout(finishLoading, 6000);
+
+        // ── Catalogue ──
+        // Rendered before anything else so every binding below sees the final cards.
+        window.JBStore.mount(document);
+
+        // ── Particles ──
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function Particle() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 0.3;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.4 + 0.1;
+        }
+
+        Particle.prototype.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 30, 30, ' + this.opacity + ')';
+            ctx.fill();
+        };
+
+        var count = Math.min(60, Math.floor(window.innerWidth / 20));
+        for (var i = 0; i < count; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            // Connect nearby
+            for (var a = 0; a < particles.length; a++) {
+                for (var b = a + 1; b < particles.length; b++) {
+                    var dx = particles[a].x - particles[b].x;
+                    var dy = particles[a].y - particles[b].y;
+                    var d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255, 0, 0, ' + (0.08 * (1 - d / 120)) + ')';
+                        ctx.lineWidth = 0.4;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ── Scroll Reveal ──
+        var revealEls = document.querySelectorAll('.reveal');
+
+        function activateReveals(root) {
+            var targets = (root || document).querySelectorAll('.reveal');
+            for (var r = 0; r < targets.length; r++) {
+                targets[r].classList.add('active');
+            }
+        }
+
+        var revealObserver = null;
+        if ('IntersectionObserver' in window) {
+            revealObserver = new IntersectionObserver(function(entries) {
+                for (var e = 0; e < entries.length; e++) {
+                    if (entries[e].isIntersecting) {
+                        entries[e].target.classList.add('active');
+                        revealObserver.unobserve(entries[e].target);
+                    }
+                }
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            for (var rv = 0; rv < revealEls.length; rv++) {
+                revealObserver.observe(revealEls[rv]);
+            }
+        } else {
+            activateReveals(document);
+        }
+
+        // ── Header Scroll Effect ──
+        var header = document.getElementById('header');
+        var backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 80) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+
+            if (window.scrollY > 600) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
+        }, { passive: true });
+
+        // ── Mobile Menu ──
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileNav = document.getElementById('mobileNav');
+
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+
+        var mobileLinks = mobileNav.querySelectorAll('a');
+        for (var m = 0; m < mobileLinks.length; m++) {
+            mobileLinks[m].addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        }
+
+        // ── Category Filter ──
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        var qualitySections = document.querySelectorAll('.quality');
+
+        for (var fb = 0; fb < filterBtns.length; fb++) {
+            filterBtns[fb].addEventListener('click', function() {
+                var filter = this.getAttribute('data-filter');
+
+                for (var j = 0; j < filterBtns.length; j++) {
+                    filterBtns[j].classList.remove('active');
+                }
+                this.classList.add('active');
+
+                for (var k = 0; k < qualitySections.length; k++) {
+                    var section = qualitySections[k];
+                    if (filter === 'all' || section.getAttribute('data-category') === filter) {
+                        section.style.display = '';
+                        section.style.animation = 'fadeUp 0.5s ease forwards';
+                        // A section hidden with display:none never intersects,
+                        // so its cards must be revealed manually when it comes back.
+                        activateReveals(section);
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // ── Back to Top ──
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ── Image Lightbox ──
+        var lightboxKeyHandler = null;
+
+        function closeLightbox(overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            if (lightboxKeyHandler) {
+                document.removeEventListener('keydown', lightboxKeyHandler);
+                lightboxKeyHandler = null;
+            }
+            setTimeout(function() {
+                if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+            }, 300);
+        }
+
+        var previews = document.querySelectorAll('.preview');
+        for (var p = 0; p < previews.length; p++) {
+            previews[p].addEventListener('click', function() {
+                var img = this.querySelector('img');
+                if (!img) return;
+
+                var overlay = document.createElement('div');
+                overlay.className = 'lightbox';
+                overlay.innerHTML = '<div class="lightbox-inner"><img src="' + img.src + '" alt="' + img.alt + '"><button class="lightbox-close" aria-label="Close preview"><i class="fas fa-times"></i></button></div>';
+                document.body.appendChild(overlay);
+                document.body.style.overflow = 'hidden';
+                setTimeout(function() { overlay.classList.add('active'); }, 10);
+
+                overlay.addEventListener('click', function() {
+                    closeLightbox(overlay);
+                });
+
+                lightboxKeyHandler = function(event) {
+                    if (event.key === 'Escape') closeLightbox(overlay);
+                };
+                document.addEventListener('keydown', lightboxKeyHandler);
+            });
+        }
+
+        // ── Recharge card fee (Orange & Ooredoo, +25%) ──
+        var feeAmount = document.getElementById('feeAmount');
+        var feeResult = document.getElementById('feeResult');
+
+        function updateFee() {
+            var value = parseFloat(feeAmount.value);
+            if (!isFinite(value) || value <= 0) {
+                feeResult.textContent = '—';
+                return;
+            }
+            var total = Math.round(value * 1.25 * 100) / 100;
+            feeResult.textContent = (total % 1 === 0 ? total.toFixed(0) : total.toFixed(2)) + ' DT';
+        }
+
+        if (feeAmount && feeResult) {
+            feeAmount.addEventListener('input', updateFee);
+            updateFee();
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>JOYBOY STORE | Staff Panel</title>
+
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ── Staff panel: deliberately small and self-contained ── */
+        :root {
+            --bg: #0a0a0b;
+            --panel: #131316;
+            --panel-2: #191920;
+            --line: rgba(255, 255, 255, 0.08);
+            --text: #ececf1;
+            --muted: #8b8b96;
+            --red: #ff2d2d;
+            --green: #22c55e;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% -10%, rgba(255, 45, 45, 0.12), transparent 55%), var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            font-size: 15px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2 { margin: 0; font-weight: 700; }
+        a { color: inherit; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--panel-2);
+            color: var(--text);
+            font: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+            white-space: nowrap;
+        }
+        .btn:hover { background: #22222b; border-color: rgba(255, 255, 255, 0.18); }
+        .btn:active { transform: translateY(1px); }
+        .btn.primary { background: var(--red); border-color: var(--red); color: #fff; font-weight: 600; }
+        .btn.primary:hover { background: #ff4d4d; border-color: #ff4d4d; }
+        .btn.danger { color: #ff8080; border-color: rgba(255, 45, 45, 0.35); }
+        .btn.danger:hover { background: rgba(255, 45, 45, 0.12); }
+        .btn.ghost { background: transparent; }
+        .btn.wide { width: 100%; justify-content: center; padding: 12px; }
+        .btn[hidden] { display: none; }
+
+        /* ── Lock screen ── */
+        .lock {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .lock[hidden] { display: none; }
+        .lock-card {
+            width: 100%;
+            max-width: 360px;
+            padding: 34px 30px 26px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+        }
+        .lock-badge {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(255, 45, 45, 0.12);
+            border: 1px solid rgba(255, 45, 45, 0.35);
+            color: var(--red);
+            font-size: 20px;
+        }
+        .lock-card h1 { font-size: 22px; margin-bottom: 6px; }
+        .lock-card p { margin: 0 0 20px; color: var(--muted); font-size: 14px; }
+        .pin {
+            width: 100%;
+            padding: 13px 16px;
+            margin-bottom: 12px;
+            background: #0b0b0d;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--text);
+            font: inherit;
+            font-size: 20px;
+            letter-spacing: 8px;
+            text-align: center;
+        }
+        .pin:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18); }
+        .lock-error { min-height: 20px; margin: 12px 0 0; color: #ff8080; font-size: 13px; }
+        .lock-back { display: inline-block; margin-top: 14px; color: var(--muted); font-size: 13px; text-decoration: none; }
+        .lock-back:hover { color: var(--text); }
+        .shake { animation: shake 0.35s ease; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-7px); }
+            75% { transform: translateX(7px); }
+        }
+
+        /* ── Panel ── */
+        .panel[hidden] { display: none; }
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px 22px;
+            background: rgba(10, 10, 11, 0.9);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(10px);
+        }
+        .brand { font-weight: 800; letter-spacing: 2px; }
+        .brand span { color: var(--red); }
+        .brand small { color: var(--muted); font-weight: 500; letter-spacing: 0; margin-left: 6px; }
+        .topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .wrap { max-width: 1000px; margin: 0 auto; padding: 24px 20px 80px; }
+
+        .notice {
+            margin-bottom: 18px;
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 45, 45, 0.35);
+            background: rgba(255, 45, 45, 0.08);
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+        .notice.ok { border-color: rgba(34, 197, 94, 0.35); background: rgba(34, 197, 94, 0.08); }
+        .notice[hidden] { display: none; }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .bar-left { color: var(--muted); font-size: 14px; }
+        .bar-left strong { color: var(--text); }
+        .bar-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .usage { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .usage-track { flex: 1; height: 6px; background: #1c1c22; border-radius: 99px; overflow: hidden; }
+        .usage-track span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green), #eab308); transition: width 0.3s ease; }
+        .usage-text { color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+
+        .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+        .tab {
+            padding: 8px 14px;
+            border-radius: 99px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active { background: var(--red); border-color: var(--red); color: #fff; font-weight: 600; }
+
+        /* ── View switch (catalogue / portfolio) ── */
+        .views {
+            display: flex;
+            gap: 8px;
+            max-width: 1000px;
+            margin: 20px auto 0;
+            padding: 0 20px;
+        }
+        .view {
+            padding: 9px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .view:hover { color: var(--text); }
+        .view.active { background: var(--panel-2); border-color: rgba(255, 255, 255, 0.18); color: var(--text); font-weight: 600; }
+        .view-panel[hidden] { display: none; }
+
+        /* ── Portfolio blocks ── */
+        .block {
+            padding: 20px;
+            margin-bottom: 18px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+        .block h3 {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 16px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .block h3 i { color: var(--red); font-size: 14px; }
+        .block .grid2 { margin-bottom: 0; }
+        .block label { display: block; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+        .block input[type="text"], .block input[type="number"], .block select {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            padding: 10px 12px;
+            background: #0b0b0d;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            color: var(--text);
+            font: inherit;
+            font-size: 14px;
+        }
+        .block input[type="text"]:focus, .block input[type="number"]:focus, .block select:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+        .block .upload { margin: 0 0 12px; }
+        .hint { margin: 10px 0 0; color: #6f6f7a; font-size: 12.5px; line-height: 1.5; }
+
+        .sub-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 16px 0 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        .sub-head.end { justify-content: flex-end; margin: 12px 0 0; }
+        .btn.small { padding: 6px 12px; font-size: 13px; }
+
+        .mini-list { display: flex; flex-direction: column; gap: 8px; }
+        .mini-row { display: flex; align-items: center; gap: 8px; }
+        .mini-row input { margin-top: 0 !important; }
+        .mini-row .icon-input { flex: 0 0 150px; }
+        .mini-row .num-input { flex: 0 0 110px; }
+        .mini-row .grow { flex: 1; min-width: 0; }
+
+        .preview-box.wide { height: 130px; }
+        .preview-box.round { height: 130px; }
+        .preview-box.round img { width: auto; height: 100%; border-radius: 50%; aspect-ratio: 1; }
+        .upload input[type="file"] { max-width: 100%; font-size: 12.5px; color: var(--muted); }
+
+        .row .url {
+            color: #5f5f6a;
+            font-size: 12px;
+            max-width: 260px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .list { display: flex; flex-direction: column; gap: 10px; }
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+        .row.is-hidden { opacity: 0.5; }
+        .thumb {
+            width: 68px;
+            height: 44px;
+            flex: none;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #0b0b0d;
+            display: grid;
+            place-items: center;
+            color: #55555f;
+            font-size: 16px;
+        }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .info { flex: 1; min-width: 0; }
+        .info .title { font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .info .title .tag {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--muted);
+            border: 1px solid var(--line);
+            border-radius: 99px;
+            padding: 1px 8px;
+        }
+        .info .title .off { color: #ff8080; font-size: 11px; font-weight: 500; }
+        .info .desc {
+            color: var(--muted);
+            font-size: 12.5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .row .price { font-weight: 600; color: #ffb4b4; white-space: nowrap; }
+        .row-actions { display: flex; gap: 6px; flex: none; }
+        .icon-btn {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .icon-btn:hover { color: var(--text); border-color: rgba(255, 255, 255, 0.2); }
+        .icon-btn.danger:hover { color: #ff8080; border-color: rgba(255, 45, 45, 0.4); }
+        .empty { padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius); }
+
+        /* ── Editor dialog ── */
+        dialog.editor {
+            width: min(560px, calc(100vw - 32px));
+            max-height: calc(100vh - 48px);
+            padding: 0;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--panel);
+            color: var(--text);
+            overflow: auto;
+        }
+        dialog.editor::backdrop { background: rgba(0, 0, 0, 0.7); }
+        .editor form { padding: 22px; }
+        .editor h2 { font-size: 18px; margin-bottom: 16px; }
+        .editor label { display: block; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
+        .editor label[hidden] { display: none; }
+        .editor input[type="text"], .editor select, .editor textarea {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            padding: 10px 12px;
+            background: #0b0b0d;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            color: var(--text);
+            font: inherit;
+            font-size: 14px;
+        }
+        .editor textarea { resize: vertical; min-height: 56px; }
+        .editor input:focus, .editor select:focus, .editor textarea:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+        .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .upload {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: -4px 0 14px;
+            color: var(--muted);
+            font-size: 12.5px;
+        }
+        .preview-box {
+            height: 120px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border: 1px dashed var(--line);
+            background: #0b0b0d;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            color: #44444d;
+            font-size: 12.5px;
+        }
+        .preview-box img { width: 100%; height: 100%; object-fit: cover; }
+        .check { display: flex; align-items: center; gap: 8px; color: var(--text) !important; }
+        .check input { width: 16px; height: 16px; accent-color: var(--red); }
+        .editor-error { min-height: 18px; margin: 6px 0 0; color: #ff8080; font-size: 13px; }
+        .editor-actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .editor-actions .spacer { flex: 1; }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translate(-50%, 20px);
+            padding: 11px 20px;
+            border-radius: 10px;
+            background: #1d1d24;
+            border: 1px solid var(--line);
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 20;
+        }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .toast.error { border-color: rgba(255, 45, 45, 0.5); color: #ffb4b4; }
+
+        @media (max-width: 620px) {
+            .grid2 { grid-template-columns: 1fr; }
+            .row { flex-wrap: wrap; }
+            .info { flex-basis: 100%; order: 3; }
+            .row .price { margin-left: auto; }
+            .topbar { padding: 12px 14px; }
+            .wrap { padding: 18px 14px 70px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ── Lock screen ── -->
+    <div class="lock" id="lockScreen">
+        <form class="lock-card" id="lockForm" autocomplete="off">
+            <div class="lock-badge"><i class="fas fa-lock" aria-hidden="true"></i></div>
+            <h1>Staff Access</h1>
+            <p>Enter the staff PIN to manage the store.</p>
+            <input class="pin" id="pinInput" type="password" inputmode="numeric" maxlength="12"
+                   placeholder="••••••••" aria-label="Staff PIN" autocomplete="off">
+            <button class="btn primary wide" type="submit">Unlock</button>
+            <p class="lock-error" id="pinError" role="alert"></p>
+            <a class="lock-back" href="index.html">&larr; Back to store</a>
+        </form>
+    </div>
+
+    <!-- ── Panel ── -->
+    <div class="panel" id="panel" hidden>
+        <header class="topbar">
+            <div class="brand">JOY<span>BOY</span> <small>staff panel</small></div>
+            <div class="topbar-actions">
+                <a href="index.html" class="btn ghost"><i class="fas fa-store" aria-hidden="true"></i> View store</a>
+                <a href="../index.html" class="btn ghost"><i class="fas fa-user" aria-hidden="true"></i> View portfolio</a>
+                <button class="btn ghost" id="lockBtn" type="button"><i class="fas fa-lock" aria-hidden="true"></i> Lock</button>
+            </div>
+        </header>
+
+        <nav class="views" id="views">
+            <button class="view active" type="button" data-view="catalogue">Store catalogue</button>
+            <button class="view" type="button" data-view="portfolio">Portfolio page</button>
+        </nav>
+
+        <main class="wrap">
+            <!-- ── Store catalogue ── -->
+            <section class="view-panel" id="viewCatalogue">
+                <div class="notice" id="notice" hidden></div>
+
+                <div class="bar">
+                    <div class="bar-left"><strong id="productCount">0</strong> products</div>
+                    <div class="bar-right">
+                        <button class="btn primary" id="addBtn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Add product</button>
+                        <button class="btn" id="downloadBtn" type="button"><i class="fas fa-download" aria-hidden="true"></i> Download products-data.js</button>
+                        <button class="btn" id="importBtn" type="button"><i class="fas fa-upload" aria-hidden="true"></i> Import</button>
+                        <button class="btn danger" id="resetBtn" type="button"><i class="fas fa-rotate-left" aria-hidden="true"></i> Reset</button>
+                    </div>
+                </div>
+                <input type="file" id="importFile" accept=".js,.json,text/plain" hidden>
+
+                <div class="usage">
+                    <div class="usage-track"><span id="usageFill"></span></div>
+                    <span class="usage-text" id="usageText"></span>
+                </div>
+
+                <nav class="tabs" id="tabs"></nav>
+                <div class="list" id="list"></div>
+            </section>
+
+            <!-- ── Portfolio page ── -->
+            <section class="view-panel" id="viewPortfolio" hidden>
+                <div class="notice" id="pNotice" hidden></div>
+
+                <div class="block">
+                    <h3><i class="fas fa-image" aria-hidden="true"></i> Banner &amp; profile photo</h3>
+                    <div class="grid2">
+                        <div>
+                            <label>Banner (wide image)
+                                <input id="pBanner" type="text" placeholder="banner.webp">
+                            </label>
+                            <div class="upload">
+                                <input type="file" id="pBannerFile" accept="image/*">
+                                <button class="btn small" id="pBannerClear" type="button">Remove</button>
+                            </div>
+                            <div class="preview-box wide" id="pBannerPreview">No banner</div>
+                        </div>
+                        <div>
+                            <label>Profile photo (square)
+                                <input id="pProfile" type="text" placeholder="logo.webp">
+                            </label>
+                            <div class="upload">
+                                <input type="file" id="pProfileFile" accept="image/*">
+                                <button class="btn small" id="pProfileClear" type="button">Remove</button>
+                            </div>
+                            <div class="preview-box round" id="pProfilePreview">No photo</div>
+                        </div>
+                    </div>
+                    <p class="hint">An upload is stored in this browser only. Send the picture into the project folder and type its path if you want it published for everyone. "Remove" drops the upload and falls back to the banner/photo that index.html already uses.</p>
+                </div>
+
+                <div class="block">
+                    <h3><i class="fas fa-signature" aria-hidden="true"></i> Name &amp; tagline</h3>
+                    <label>Name
+                        <input id="pTitle" type="text" placeholder="JOYBOY">
+                    </label>
+                    <div class="sub-head">
+                        <span>Tagline items</span>
+                        <button class="btn small" id="pAddTagline" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Add</button>
+                    </div>
+                    <div class="mini-list" id="pTaglineList"></div>
+                </div>
+
+                <div class="block">
+                    <h3><i class="fas fa-chart-simple" aria-hidden="true"></i> Stats</h3>
+                    <div class="mini-list" id="pStatList"></div>
+                    <div class="sub-head end">
+                        <button class="btn small" id="pAddStat" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Add stat</button>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h3><i class="fas fa-link" aria-hidden="true"></i> Link cards</h3>
+                    <div class="list" id="pLinkList"></div>
+                    <div class="sub-head end">
+                        <button class="btn primary" id="pAddLink" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Add link</button>
+                    </div>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-left">Changes appear on the portfolio page of this browser right away.</div>
+                    <div class="bar-right">
+                        <button class="btn" id="pDownload" type="button"><i class="fas fa-download" aria-hidden="true"></i> Download portfolio-data.js</button>
+                        <button class="btn" id="pImport" type="button"><i class="fas fa-upload" aria-hidden="true"></i> Import</button>
+                        <button class="btn danger" id="pReset" type="button"><i class="fas fa-rotate-left" aria-hidden="true"></i> Reset</button>
+                    </div>
+                </div>
+                <input type="file" id="pImportFile" accept=".js,.json,text/plain" hidden>
+            </section>
+        </main>
+    </div>
+
+    <!-- ── Product editor ── -->
+    <dialog class="editor" id="editor">
+        <form id="editorForm" novalidate>
+            <h2 id="editorTitle">Edit product</h2>
+
+            <div class="grid2">
+                <label>Category
+                    <select id="fCategory"></select>
+                </label>
+                <label>Price
+                    <input id="fPrice" type="text" placeholder="$20 / 5 DT / Gift">
+                </label>
+            </div>
+
+            <label>Title
+                <input id="fTitle" type="text" placeholder="V1">
+            </label>
+
+            <label>Description
+                <textarea id="fDesc" rows="2" placeholder="Professional Quality Method."></textarea>
+            </label>
+
+            <div class="grid2">
+                <label>Badge (optional)
+                    <input id="fBadge" type="text" placeholder="POPULAR">
+                </label>
+                <label>Badge colour
+                    <select id="fBadgeStyle">
+                        <option value="">Red</option>
+                        <option value="hot">Orange</option>
+                        <option value="gift">Green</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="grid2">
+                <label>Big figure (no photo)
+                    <input id="fAmount" type="text" placeholder="100">
+                </label>
+                <label>Caption (no photo)
+                    <input id="fCaption" type="text" placeholder="Diamonds">
+                </label>
+            </div>
+
+            <label>Image path
+                <input id="fImage" type="text" placeholder="Quality/V1.webp">
+            </label>
+
+            <div class="upload">
+                <input type="file" id="fFile" accept="image/*">
+                <button class="btn" id="fClearImage" type="button">Remove image</button>
+            </div>
+
+            <div class="preview-box" id="fPreviewBox">No image</div>
+
+            <label class="check">
+                <input type="checkbox" id="fHidden"> Hide from the store
+            </label>
+
+            <p class="editor-error" id="editorError" role="alert"></p>
+
+            <div class="editor-actions">
+                <button class="btn danger" id="deleteBtn" type="button"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
+                <span class="spacer"></span>
+                <button class="btn" id="cancelBtn" type="button">Cancel</button>
+                <button class="btn primary" type="submit">Save</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ── Portfolio link editor ── -->
+    <dialog class="editor" id="linkEditor">
+        <form id="linkForm" novalidate>
+            <h2 id="linkEditorTitle">Edit link</h2>
+
+            <label>Platform
+                <select id="lPlatform"></select>
+            </label>
+
+            <label id="lIconWrap" hidden>Custom icon class
+                <input id="lIcon" type="text" placeholder="fas fa-link">
+            </label>
+
+            <label>Title
+                <input id="lTitle" type="text" placeholder="TikTok">
+            </label>
+
+            <label>Subtitle
+                <input id="lSubtitle" type="text" placeholder="@king_joyboy17">
+            </label>
+
+            <label>Link
+                <input id="lUrl" type="text" placeholder="https://tiktok.com/@king_joyboy17">
+            </label>
+
+            <label class="check">
+                <input type="checkbox" id="lFooter"> Also show in the footer icons
+            </label>
+
+            <p class="editor-error" id="linkError" role="alert"></p>
+
+            <div class="editor-actions">
+                <button class="btn danger" id="lDelete" type="button"><i class="fas fa-trash" aria-hidden="true"></i> Delete</button>
+                <span class="spacer"></span>
+                <button class="btn" id="lCancel" type="button">Cancel</button>
+                <button class="btn primary" type="submit">Save</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="products-data.js"></script>
+    <script src="products.js"></script>
+    <script src="../portfolio-data.js"></script>
+    <script src="../portfolio.js"></script>
+    <script>
+    (function () {
+        'use strict';
+
+        /* ── PIN ─────────────────────────────────────────────────────
+           Only a hash of the PIN lives here, so it is not readable as
+           plain text in the page source. This hides the panel from
+           visitors, it is NOT real security: anyone with the file can
+           still read the catalogue. Change the PIN by replacing
+           PIN_HASH with the hash of your new PIN. */
+        var PIN_HASH = 0x8981a461;
+        var SESSION_KEY = 'joyboyStaffUnlocked';
+
+        function hashPin(text) {
+            var hash = 2166136261;
+            for (var i = 0; i < text.length; i++) {
+                hash ^= text.charCodeAt(i);
+                hash = Math.imul(hash, 16777619) >>> 0;
+            }
+            return hash >>> 0;
+        }
+
+        var lockScreen = document.getElementById('lockScreen');
+        var lockForm = document.getElementById('lockForm');
+        var pinInput = document.getElementById('pinInput');
+        var pinError = document.getElementById('pinError');
+        var panel = document.getElementById('panel');
+
+        function unlocked() {
+            try {
+                return window.sessionStorage.getItem(SESSION_KEY) === '1';
+            } catch (err) {
+                return false;
+            }
+        }
+
+        function rememberUnlock() {
+            try {
+                window.sessionStorage.setItem(SESSION_KEY, '1');
+            } catch (err) {
+                /* storage blocked - the panel still works for this view */
+            }
+        }
+
+        function showPanel() {
+            lockScreen.hidden = true;
+            panel.hidden = false;
+            render();
+        }
+
+        /* The panel is revealed at the end of this script, once the
+           catalogue and portfolio state exist. */
+
+        lockForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (hashPin(pinInput.value.trim()) === PIN_HASH) {
+                rememberUnlock();
+                pinInput.value = '';
+                pinError.textContent = '';
+                showPanel();
+                return;
+            }
+            pinError.textContent = 'Wrong PIN, try again.';
+            lockForm.classList.remove('shake');
+            void lockForm.offsetWidth;
+            lockForm.classList.add('shake');
+            pinInput.value = '';
+            pinInput.focus();
+        });
+
+        document.getElementById('lockBtn').addEventListener('click', function () {
+            try {
+                window.sessionStorage.removeItem(SESSION_KEY);
+            } catch (err) {
+                /* nothing to clear */
+            }
+            window.location.reload();
+        });
+
+        /* ── State ─────────────────────────────────────────────────── */
+        var list = window.JBStore.load();
+        var activeCategory = 'all';
+        var editingId = null;
+
+        var listEl = document.getElementById('list');
+        var tabsEl = document.getElementById('tabs');
+        var countEl = document.getElementById('productCount');
+        var noticeEl = document.getElementById('notice');
+        var toastEl = document.getElementById('toast');
+        var usageFill = document.getElementById('usageFill');
+        var usageText = document.getElementById('usageText');
+
+        var editor = document.getElementById('editor');
+        var editorForm = document.getElementById('editorForm');
+        var editorTitle = document.getElementById('editorTitle');
+        var editorError = document.getElementById('editorError');
+        var fCategory = document.getElementById('fCategory');
+        var fTitle = document.getElementById('fTitle');
+        var fDesc = document.getElementById('fDesc');
+        var fPrice = document.getElementById('fPrice');
+        var fBadge = document.getElementById('fBadge');
+        var fBadgeStyle = document.getElementById('fBadgeStyle');
+        var fAmount = document.getElementById('fAmount');
+        var fCaption = document.getElementById('fCaption');
+        var fImage = document.getElementById('fImage');
+        var fHidden = document.getElementById('fHidden');
+        var fFile = document.getElementById('fFile');
+        var fPreviewBox = document.getElementById('fPreviewBox');
+
+        var toastTimer = null;
+
+        function toast(message, isError) {
+            toastEl.textContent = message;
+            toastEl.className = 'toast show' + (isError ? ' error' : '');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () {
+                toastEl.className = 'toast';
+            }, 2600);
+        }
+
+        function notice(message, isOk) {
+            if (!message) {
+                noticeEl.hidden = true;
+                return;
+            }
+            noticeEl.hidden = false;
+            noticeEl.className = 'notice' + (isOk ? ' ok' : '');
+            noticeEl.textContent = message;
+        }
+
+        /* Persist the whole catalogue. A failed write (full storage) is
+           reported but never throws away the in-memory edits. */
+        function persist() {
+            var result = window.JBStore.save(list);
+            if (!result.ok) {
+                notice(result.error, false);
+                toast('Not saved - storage full', true);
+                return false;
+            }
+            if (!window.JBStore.isCustomised()) {
+                notice('Showing the published catalogue. Your edits stay in this browser until you download products-data.js and replace Store/products-data.js.', false);
+            } else {
+                notice('Edits are saved in this browser. Download products-data.js and replace Store/products-data.js to publish them for every visitor.', false);
+            }
+            return true;
+        }
+
+        function refreshUsage() {
+            var bytes = window.JBStore.storedBytes();
+            var mb = bytes / (1024 * 1024);
+            usageFill.style.width = Math.min(100, (mb / 4.5) * 100) + '%';
+            usageText.textContent = mb < 0.01
+                ? 'Browser storage: empty'
+                : 'Browser storage: ' + mb.toFixed(2) + ' MB / ~5 MB';
+        }
+
+        /* ── Tabs ──────────────────────────────────────────────────── */
+        function buildTabs() {
+            tabsEl.innerHTML = '';
+
+            var all = document.createElement('button');
+            all.type = 'button';
+            all.className = 'tab' + (activeCategory === 'all' ? ' active' : '');
+            all.textContent = 'All (' + list.length + ')';
+            all.addEventListener('click', function () {
+                activeCategory = 'all';
+                render();
+            });
+            tabsEl.appendChild(all);
+
+            var cats = window.JBStore.CATEGORIES;
+            for (var i = 0; i < cats.length; i++) {
+                (function (cat) {
+                    var total = 0;
+                    for (var p = 0; p < list.length; p++) {
+                        if (list[p].category === cat.id) total++;
+                    }
+                    var button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'tab' + (activeCategory === cat.id ? ' active' : '');
+                    button.textContent = cat.name + ' (' + total + ')';
+                    button.addEventListener('click', function () {
+                        activeCategory = cat.id;
+                        render();
+                    });
+                    tabsEl.appendChild(button);
+                })(cats[i]);
+            }
+        }
+
+        /* ── List ──────────────────────────────────────────────────── */
+        function makeThumb(product) {
+            var thumb = document.createElement('div');
+            thumb.className = 'thumb';
+            if (product.image) {
+                var img = document.createElement('img');
+                img.src = product.image;
+                img.alt = '';
+                img.loading = 'lazy';
+                thumb.appendChild(img);
+            } else {
+                var icon = document.createElement('i');
+                icon.className = product.icon || 'fas fa-box-open';
+                icon.setAttribute('aria-hidden', 'true');
+                thumb.appendChild(icon);
+            }
+            return thumb;
+        }
+
+        function iconButton(icon, label, extraClass, handler) {
+            var button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'icon-btn' + (extraClass ? ' ' + extraClass : '');
+            button.setAttribute('aria-label', label);
+            button.title = label;
+            var i = document.createElement('i');
+            i.className = icon;
+            i.setAttribute('aria-hidden', 'true');
+            button.appendChild(i);
+            button.addEventListener('click', handler);
+            return button;
+        }
+
+        function move(product, direction) {
+            var sameCategory = [];
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].category === product.category) sameCategory.push(list[i]);
+            }
+            var position = sameCategory.indexOf(product);
+            var target = sameCategory[position + direction];
+            if (!target) return;
+
+            var from = list.indexOf(product);
+            var to = list.indexOf(target);
+            list[from] = target;
+            list[to] = product;
+
+            persist();
+            render();
+        }
+
+        function makeRow(product) {
+            var row = document.createElement('div');
+            row.className = 'row' + (product.hidden ? ' is-hidden' : '');
+
+            row.appendChild(makeThumb(product));
+
+            var info = document.createElement('div');
+            info.className = 'info';
+
+            var title = document.createElement('div');
+            title.className = 'title';
+            title.appendChild(document.createTextNode(product.title));
+
+            var tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.textContent = window.JBStore.categoryName(product.category);
+            title.appendChild(tag);
+
+            if (product.hidden) {
+                var off = document.createElement('span');
+                off.className = 'off';
+                off.textContent = 'hidden';
+                title.appendChild(off);
+            }
+            info.appendChild(title);
+
+            var desc = document.createElement('div');
+            desc.className = 'desc';
+            desc.textContent = product.desc || 'No description';
+            info.appendChild(desc);
+
+            row.appendChild(info);
+
+            var price = document.createElement('div');
+            price.className = 'price';
+            price.textContent = product.price || '—';
+            row.appendChild(price);
+
+            var actions = document.createElement('div');
+            actions.className = 'row-actions';
+            actions.appendChild(iconButton('fas fa-arrow-up', 'Move up', '', function () { move(product, -1); }));
+            actions.appendChild(iconButton('fas fa-arrow-down', 'Move down', '', function () { move(product, 1); }));
+            actions.appendChild(iconButton('fas fa-pen', 'Edit product', '', function () { openEditor(product); }));
+            actions.appendChild(iconButton('fas fa-trash', 'Delete product', 'danger', function () {
+                if (!window.confirm('Delete "' + product.title + '"?')) return;
+                var index = list.indexOf(product);
+                if (index === -1) return;
+                list.splice(index, 1);
+                persist();
+                render();
+                toast('Product deleted');
+            }));
+            row.appendChild(actions);
+
+            return row;
+        }
+
+        function render() {
+            buildTabs();
+            listEl.innerHTML = '';
+
+            var shown = 0;
+            for (var i = 0; i < list.length; i++) {
+                if (activeCategory !== 'all' && list[i].category !== activeCategory) continue;
+                listEl.appendChild(makeRow(list[i]));
+                shown++;
+            }
+
+            if (!shown) {
+                var empty = document.createElement('div');
+                empty.className = 'empty';
+                empty.textContent = 'No products in this category yet. Use "Add product" to create one.';
+                listEl.appendChild(empty);
+            }
+
+            countEl.textContent = String(list.length);
+            refreshUsage();
+            if (!window.JBStore.isCustomised()) {
+                notice('Showing the published catalogue. Your edits stay in this browser until you download products-data.js and replace Store/products-data.js.', false);
+            }
+        }
+
+        /* ── Editor ────────────────────────────────────────────────── */
+        function fillCategories(selected) {
+            fCategory.innerHTML = '';
+            var cats = window.JBStore.CATEGORIES;
+            for (var i = 0; i < cats.length; i++) {
+                var option = document.createElement('option');
+                option.value = cats[i].id;
+                option.textContent = cats[i].name;
+                if (cats[i].id === selected) option.selected = true;
+                fCategory.appendChild(option);
+            }
+        }
+
+        function updatePreview() {
+            fPreviewBox.innerHTML = '';
+            if (fImage.value) {
+                var img = document.createElement('img');
+                img.src = fImage.value;
+                img.alt = '';
+                img.onerror = function () {
+                    fPreviewBox.innerHTML = '';
+                    fPreviewBox.textContent = 'Image not found';
+                };
+                fPreviewBox.appendChild(img);
+                return;
+            }
+            var icon = String(fAmount.value || fCaption.value || '').trim();
+            fPreviewBox.textContent = icon ? 'Figure: ' + icon : 'No image';
+        }
+
+        function openEditor(product) {
+            editingId = product ? product.id : null;
+            editorTitle.textContent = product ? 'Edit product' : 'New product';
+            editorError.textContent = '';
+
+            fillCategories(product ? product.category : (activeCategory === 'all' ? 'premiere' : activeCategory));
+            fTitle.value = product ? product.title : '';
+            fDesc.value = product ? (product.desc || '') : '';
+            fPrice.value = product ? (product.price || '') : '';
+            fBadge.value = product ? (product.badge || '') : '';
+            fBadgeStyle.value = product ? (product.badgeStyle || '') : '';
+            fAmount.value = product ? (product.amount || '') : '';
+            fCaption.value = product ? (product.caption || '') : '';
+            fImage.value = product ? (product.image || '') : '';
+            fHidden.checked = !!(product && product.hidden);
+            fFile.value = '';
+            document.getElementById('deleteBtn').hidden = !product;
+
+            updatePreview();
+            editor.showModal();
+            fTitle.focus();
+        }
+
+        function closeEditor() {
+            if (editor.open) editor.close();
+            editingId = null;
+        }
+
+        document.getElementById('addBtn').addEventListener('click', function () {
+            openEditor(null);
+        });
+        document.getElementById('cancelBtn').addEventListener('click', closeEditor);
+
+        fImage.addEventListener('input', updatePreview);
+        fAmount.addEventListener('input', updatePreview);
+        fCaption.addEventListener('input', updatePreview);
+
+        document.getElementById('fClearImage').addEventListener('click', function () {
+            fImage.value = '';
+            fFile.value = '';
+            updatePreview();
+        });
+
+        /* Downscales an uploaded picture and returns it as a compact WebP
+           data URL, so it costs ~50-120 KB of the ~5 MB browser storage
+           instead of several megabytes. */
+        function readImageFile(file, maxSize, done) {
+            if (!file) return;
+            if (!/^image\//.test(file.type)) {
+                done('That file is not an image.', null);
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function () {
+                var img = new Image();
+                img.onload = function () {
+                    var scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+                    var canvas = document.createElement('canvas');
+                    canvas.width = Math.round(img.width * scale);
+                    canvas.height = Math.round(img.height * scale);
+                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    var dataUrl = canvas.toDataURL('image/webp', 0.82);
+                    if (dataUrl.indexOf('data:image/webp') !== 0) {
+                        dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+                    }
+                    done(null, dataUrl);
+                };
+                img.onerror = function () {
+                    done('Could not read that image.', null);
+                };
+                img.src = reader.result;
+            };
+            reader.onerror = function () {
+                done('Could not read that file.', null);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        fFile.addEventListener('change', function () {
+            readImageFile(fFile.files && fFile.files[0], 800, function (error, dataUrl) {
+                if (error) {
+                    editorError.textContent = error;
+                    return;
+                }
+                fImage.value = dataUrl;
+                updatePreview();
+                editorError.textContent = '';
+            });
+        });
+
+        editorForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var title = fTitle.value.trim();
+            if (!title) {
+                editorError.textContent = 'A title is required.';
+                fTitle.focus();
+                return;
+            }
+
+            var product = {
+                id: editingId || window.JBStore.uid(),
+                category: fCategory.value,
+                title: title,
+                desc: fDesc.value.trim(),
+                price: fPrice.value.trim(),
+                badge: fBadge.value.trim(),
+                badgeStyle: fBadgeStyle.value,
+                amount: fAmount.value.trim(),
+                caption: fCaption.value.trim(),
+                image: fImage.value.trim(),
+                icon: fCategory.value === 'discord' ? 'fab fa-discord' : (fCategory.value === 'diamond' ? 'fas fa-gem' : 'fas fa-box-open'),
+                hidden: fHidden.checked
+            };
+
+            var isEdit = !!editingId;
+
+            if (editingId) {
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].id === editingId) {
+                        list[i] = product;
+                        break;
+                    }
+                }
+            } else {
+                list.push(product);
+                activeCategory = 'all';
+            }
+
+            persist();
+            render();
+            closeEditor();
+            toast(isEdit ? 'Product saved' : 'Product added');
+        });
+
+        document.getElementById('deleteBtn').addEventListener('click', function () {
+            if (!editingId) return;
+            var target = null;
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].id === editingId) target = list[i];
+            }
+            if (!target) return;
+            if (!window.confirm('Delete "' + target.title + '"?')) return;
+            list.splice(list.indexOf(target), 1);
+            persist();
+            render();
+            closeEditor();
+            toast('Product deleted');
+        });
+
+        /* ── Export / import / reset ───────────────────────────────── */
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            var source = window.JBStore.toSource(list);
+            var blob = new Blob([source], { type: 'text/javascript;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'products-data.js';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            toast('products-data.js downloaded');
+        });
+
+        var importFile = document.getElementById('importFile');
+        document.getElementById('importBtn').addEventListener('click', function () {
+            importFile.click();
+        });
+
+        importFile.addEventListener('change', function () {
+            var file = importFile.files && importFile.files[0];
+            if (!file) return;
+
+            var reader = new FileReader();
+            reader.onload = function () {
+                var imported = window.JBStore.fromSource(reader.result);
+                if (!imported) {
+                    toast('That file is not a valid catalogue', true);
+                    return;
+                }
+                if (!window.confirm('Replace the current ' + list.length + ' products with the ' + imported.length + ' products from this file?')) return;
+                list = imported;
+                persist();
+                render();
+                toast('Catalogue imported');
+            };
+            reader.onerror = function () {
+                toast('Could not read that file', true);
+            };
+            reader.readAsText(file);
+            importFile.value = '';
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function () {
+            if (!window.confirm('Discard every edit made in this browser and go back to the published catalogue?')) return;
+            window.JBStore.clear();
+            list = window.JBStore.defaults();
+            activeCategory = 'all';
+            render();
+            toast('Back to the published catalogue');
+        });
+
+        /* ══════════════════════════════════════════════════════════════
+           PORTFOLIO PAGE
+
+           Edits the content of ../index.html: banner, profile photo,
+           name, tagline, stats and the link cards. Everything is saved
+           in this browser at once; "Download portfolio-data.js"
+           produces the file that publishes it to every visitor.
+           ══════════════════════════════════════════════════════════════ */
+
+        var pf = window.JBPortfolio;
+        var pfData = pf.load();
+        var pfLinkId = null;
+
+        var pNoticeEl = document.getElementById('pNotice');
+        var pBanner = document.getElementById('pBanner');
+        var pBannerFile = document.getElementById('pBannerFile');
+        var pBannerPreview = document.getElementById('pBannerPreview');
+        var pProfile = document.getElementById('pProfile');
+        var pProfileFile = document.getElementById('pProfileFile');
+        var pProfilePreview = document.getElementById('pProfilePreview');
+        var pTitle = document.getElementById('pTitle');
+        var pTaglineList = document.getElementById('pTaglineList');
+        var pStatList = document.getElementById('pStatList');
+        var pLinkList = document.getElementById('pLinkList');
+        var pImportFile = document.getElementById('pImportFile');
+
+        var linkEditor = document.getElementById('linkEditor');
+        var linkForm = document.getElementById('linkForm');
+        var linkEditorTitle = document.getElementById('linkEditorTitle');
+        var linkError = document.getElementById('linkError');
+        var lPlatform = document.getElementById('lPlatform');
+        var lIconWrap = document.getElementById('lIconWrap');
+        var lIconField = document.getElementById('lIcon');
+        var lTitle = document.getElementById('lTitle');
+        var lSubtitle = document.getElementById('lSubtitle');
+        var lUrl = document.getElementById('lUrl');
+        var lFooter = document.getElementById('lFooter');
+        var lDelete = document.getElementById('lDelete');
+
+        /* ── Views ─────────────────────────────────────────────────── */
+        var viewButtons = document.querySelectorAll('.view');
+        var viewCatalogue = document.getElementById('viewCatalogue');
+        var viewPortfolio = document.getElementById('viewPortfolio');
+
+        function showView(name) {
+            for (var i = 0; i < viewButtons.length; i++) {
+                var isActive = viewButtons[i].getAttribute('data-view') === name;
+                if (isActive) viewButtons[i].classList.add('active');
+                else viewButtons[i].classList.remove('active');
+            }
+            viewCatalogue.hidden = name !== 'catalogue';
+            viewPortfolio.hidden = name !== 'portfolio';
+            try {
+                window.sessionStorage.setItem('joyboyStaffView', name);
+            } catch (err) {
+                /* storage blocked - the view is simply not remembered */
+            }
+            if (name === 'portfolio') pfRender();
+        }
+
+        for (var vb = 0; vb < viewButtons.length; vb++) {
+            (function (button) {
+                button.addEventListener('click', function () {
+                    showView(button.getAttribute('data-view'));
+                });
+            })(viewButtons[vb]);
+        }
+
+        /* ── Save / feedback ───────────────────────────────────────── */
+        function pfNotice(message, isOk) {
+            if (!message) {
+                pNoticeEl.hidden = true;
+                return;
+            }
+            pNoticeEl.hidden = false;
+            pNoticeEl.className = 'notice' + (isOk ? ' ok' : '');
+            pNoticeEl.textContent = message;
+        }
+
+        /* Saves the whole portfolio. pfData is deliberately never
+           replaced here: each row keeps a reference to the object it
+           was built from, and indexOf() must keep finding it. */
+        function pfPersist() {
+            var result = pf.save(pfData);
+            if (!result.ok) {
+                pfNotice(result.error, false);
+                toast('Not saved - storage full', true);
+                return false;
+            }
+            pfNotice('Saved in this browser. Download portfolio-data.js and replace the file in the project root to publish it for every visitor.', false);
+            return true;
+        }
+
+        /* ── Banner & profile photo ────────────────────────────────── */
+        function pfSetImageField(previewEl, value, emptyText) {
+            previewEl.innerHTML = '';
+            if (!value) {
+                previewEl.textContent = emptyText;
+                return;
+            }
+            var img = document.createElement('img');
+            img.src = value;
+            img.alt = '';
+            img.onerror = function () {
+                previewEl.innerHTML = '';
+                previewEl.textContent = 'Image not found';
+            };
+            previewEl.appendChild(img);
+        }
+
+        /* Uploaded pictures are data URLs, thousands of characters long,
+           so they are never written into the text field - the field
+           only shows a short hint instead. */
+        function pfSyncImages() {
+            var banner = pfData.banner.image;
+            var bannerIsUpload = banner.indexOf('data:') === 0;
+            pBanner.value = bannerIsUpload ? '' : banner;
+            pBanner.placeholder = bannerIsUpload ? 'Uploaded picture' : 'banner.webp';
+            pfSetImageField(pBannerPreview, banner, 'No banner');
+
+            var photo = pfData.profile.image;
+            var photoIsUpload = photo.indexOf('data:') === 0;
+            pProfile.value = photoIsUpload ? '' : photo;
+            pProfile.placeholder = photoIsUpload ? 'Uploaded picture' : 'logo.webp';
+            pfSetImageField(pProfilePreview, photo, 'No photo');
+        }
+
+        /* An empty field never wipes an upload: "Remove" does that. */
+        function pfBannerFromField() {
+            var value = pBanner.value.trim();
+            if (!value && pfData.banner.image.indexOf('data:') === 0) return;
+            pfData.banner.image = value;
+            pfSetImageField(pBannerPreview, value, 'No banner');
+        }
+
+        function pfProfileFromField() {
+            var value = pProfile.value.trim();
+            if (!value && pfData.profile.image.indexOf('data:') === 0) return;
+            pfData.profile.image = value;
+            pfSetImageField(pProfilePreview, value, 'No photo');
+        }
+
+        pBanner.addEventListener('input', pfBannerFromField);
+        pBanner.addEventListener('change', pfPersist);
+        pProfile.addEventListener('input', pfProfileFromField);
+        pProfile.addEventListener('change', pfPersist);
+
+        pBannerFile.addEventListener('change', function () {
+            readImageFile(pBannerFile.files && pBannerFile.files[0], 1200, function (error, dataUrl) {
+                if (error) {
+                    pfNotice(error, false);
+                    return;
+                }
+                pfData.banner.image = dataUrl;
+                pfSyncImages();
+                pfPersist();
+                toast('Banner updated');
+            });
+            pBannerFile.value = '';
+        });
+
+        pProfileFile.addEventListener('change', function () {
+            readImageFile(pProfileFile.files && pProfileFile.files[0], 600, function (error, dataUrl) {
+                if (error) {
+                    pfNotice(error, false);
+                    return;
+                }
+                pfData.profile.image = dataUrl;
+                pfSyncImages();
+                pfPersist();
+                toast('Profile photo updated');
+            });
+            pProfileFile.value = '';
+        });
+
+        document.getElementById('pBannerClear').addEventListener('click', function () {
+            pfData.banner.image = '';
+            pfSyncImages();
+            pfPersist();
+            toast('Banner removed');
+        });
+
+        document.getElementById('pProfileClear').addEventListener('click', function () {
+            pfData.profile.image = '';
+            pfSyncImages();
+            pfPersist();
+            toast('Profile photo removed');
+        });
+
+        /* ── Name ──────────────────────────────────────────────────── */
+        pTitle.addEventListener('input', function () {
+            pfData.title = pTitle.value.trim() || 'JOYBOY';
+        });
+        pTitle.addEventListener('change', pfPersist);
+
+        /* ── Tagline ───────────────────────────────────────────────── */
+        function pfRenderTagline() {
+            pTaglineList.innerHTML = '';
+            if (!pfData.tagline.length) {
+                var empty = document.createElement('div');
+                empty.className = 'empty';
+                empty.textContent = 'No tagline words yet. Use "Add" to create one.';
+                pTaglineList.appendChild(empty);
+                return;
+            }
+            for (var i = 0; i < pfData.tagline.length; i++) pfTaglineRow(i, pfData.tagline[i]);
+        }
+
+        function pfTaglineRow(index, item) {
+            var row = document.createElement('div');
+            row.className = 'mini-row';
+
+            var icon = document.createElement('input');
+            icon.type = 'text';
+            icon.className = 'icon-input';
+            icon.placeholder = 'fas fa-star';
+            icon.value = item.icon;
+            icon.setAttribute('aria-label', 'Font Awesome icon class');
+            icon.addEventListener('input', function () {
+                item.icon = icon.value.trim() || 'fas fa-star';
+            });
+            icon.addEventListener('change', pfPersist);
+            row.appendChild(icon);
+
+            var label = document.createElement('input');
+            label.type = 'text';
+            label.className = 'grow';
+            label.placeholder = 'Gaming';
+            label.value = item.label;
+            label.setAttribute('aria-label', 'Tagline text');
+            label.addEventListener('input', function () {
+                item.label = label.value;
+            });
+            label.addEventListener('change', pfPersist);
+            row.appendChild(label);
+
+            row.appendChild(iconButton('fas fa-trash', 'Remove', 'danger', function () {
+                pfData.tagline.splice(index, 1);
+                pfPersist();
+                pfRenderTagline();
+            }));
+
+            pTaglineList.appendChild(row);
+        }
+
+        document.getElementById('pAddTagline').addEventListener('click', function () {
+            pfData.tagline.push({ icon: 'fas fa-star', label: '' });
+            pfPersist();
+            pfRenderTagline();
+            var fields = pTaglineList.querySelectorAll('.grow');
+            if (fields.length) fields[fields.length - 1].focus();
+        });
+
+        /* ── Stats ─────────────────────────────────────────────────── */
+        function pfRenderStats() {
+            pStatList.innerHTML = '';
+            if (!pfData.stats.length) {
+                var empty = document.createElement('div');
+                empty.className = 'empty';
+                empty.textContent = 'No stats yet. Use "Add stat" to create one.';
+                pStatList.appendChild(empty);
+                return;
+            }
+            for (var i = 0; i < pfData.stats.length; i++) pfStatRow(i, pfData.stats[i]);
+        }
+
+        function pfStatRow(index, item) {
+            var row = document.createElement('div');
+            row.className = 'mini-row';
+
+            var value = document.createElement('input');
+            value.type = 'number';
+            value.className = 'num-input';
+            value.min = '0';
+            value.step = '1';
+            value.placeholder = '4500';
+            value.value = String(item.value);
+            value.setAttribute('aria-label', 'Number');
+            value.addEventListener('input', function () {
+                item.value = Math.max(0, Math.round(Number(value.value) || 0));
+            });
+            value.addEventListener('change', pfPersist);
+            row.appendChild(value);
+
+            var label = document.createElement('input');
+            label.type = 'text';
+            label.className = 'grow';
+            label.placeholder = 'TikTok';
+            label.value = item.label;
+            label.setAttribute('aria-label', 'Stat label');
+            label.addEventListener('input', function () {
+                item.label = label.value;
+            });
+            label.addEventListener('change', pfPersist);
+            row.appendChild(label);
+
+            row.appendChild(iconButton('fas fa-trash', 'Remove', 'danger', function () {
+                pfData.stats.splice(index, 1);
+                pfPersist();
+                pfRenderStats();
+            }));
+
+            pStatList.appendChild(row);
+        }
+
+        document.getElementById('pAddStat').addEventListener('click', function () {
+            pfData.stats.push({ value: 0, label: '' });
+            pfPersist();
+            pfRenderStats();
+            var fields = pStatList.querySelectorAll('.grow');
+            if (fields.length) fields[fields.length - 1].focus();
+        });
+
+        /* ── Links ─────────────────────────────────────────────────── */
+        function pfPlatformById(id) {
+            for (var i = 0; i < pf.PLATFORMS.length; i++) {
+                if (pf.PLATFORMS[i].id === id) return pf.PLATFORMS[i];
+            }
+            return pf.PLATFORMS[pf.PLATFORMS.length - 1];
+        }
+
+        /* Guesses which platform a stored link came from, so the editor
+           opens on the right entry. */
+        function pfPlatformOf(link) {
+            for (var i = 0; i < pf.PLATFORMS.length; i++) {
+                var platform = pf.PLATFORMS[i];
+                if (platform.id === 'custom') continue;
+                if (platform.icon === link.icon && platform.accent === link.accent) return platform;
+            }
+            return pfPlatformById('custom');
+        }
+
+        function pfRenderLinks() {
+            pLinkList.innerHTML = '';
+            if (!pfData.links.length) {
+                var empty = document.createElement('div');
+                empty.className = 'empty';
+                empty.textContent = 'No links yet. Use "Add link" to create the first card.';
+                pLinkList.appendChild(empty);
+                return;
+            }
+            for (var i = 0; i < pfData.links.length; i++) pfLinkRow(pfData.links[i]);
+        }
+
+        function pfLinkRow(link) {
+            var row = document.createElement('div');
+            row.className = 'row';
+
+            var thumb = document.createElement('div');
+            thumb.className = 'thumb';
+            var glyph = document.createElement('i');
+            glyph.className = link.icon || 'fas fa-link';
+            glyph.setAttribute('aria-hidden', 'true');
+            thumb.appendChild(glyph);
+            row.appendChild(thumb);
+
+            var info = document.createElement('div');
+            info.className = 'info';
+
+            var title = document.createElement('div');
+            title.className = 'title';
+            title.appendChild(document.createTextNode(link.title || '(untitled)'));
+
+            var tag = document.createElement('span');
+            tag.className = 'tag';
+            tag.textContent = pfPlatformOf(link).name;
+            title.appendChild(tag);
+
+            if (link.footer) {
+                var inFooter = document.createElement('span');
+                inFooter.className = 'tag';
+                inFooter.textContent = 'in footer';
+                title.appendChild(inFooter);
+            }
+            info.appendChild(title);
+
+            var desc = document.createElement('div');
+            desc.className = 'desc';
+            desc.textContent = link.url ? (link.subtitle ? link.subtitle + ' · ' + link.url : link.url) : 'No link yet';
+            info.appendChild(desc);
+
+            row.appendChild(info);
+
+            var actions = document.createElement('div');
+            actions.className = 'row-actions';
+            actions.appendChild(iconButton('fas fa-arrow-up', 'Move up', '', function () {
+                pfMoveLink(link, -1);
+            }));
+            actions.appendChild(iconButton('fas fa-arrow-down', 'Move down', '', function () {
+                pfMoveLink(link, 1);
+            }));
+            actions.appendChild(iconButton('fas fa-pen', 'Edit link', '', function () {
+                pfOpenLink(link);
+            }));
+            actions.appendChild(iconButton('fas fa-trash', 'Delete link', 'danger', function () {
+                if (!window.confirm('Delete "' + (link.title || 'this link') + '"?')) return;
+                var index = pfData.links.indexOf(link);
+                if (index === -1) return;
+                pfData.links.splice(index, 1);
+                pfPersist();
+                pfRenderLinks();
+                toast('Link deleted');
+            }));
+            row.appendChild(actions);
+
+            pLinkList.appendChild(row);
+        }
+
+        function pfMoveLink(link, direction) {
+            var index = pfData.links.indexOf(link);
+            var target = index + direction;
+            if (index === -1 || target < 0 || target >= pfData.links.length) return;
+            pfData.links[index] = pfData.links[target];
+            pfData.links[target] = link;
+            pfPersist();
+            pfRenderLinks();
+        }
+
+        /* ── Link editor ───────────────────────────────────────────── */
+        function pfFillPlatforms(selected) {
+            lPlatform.innerHTML = '';
+            for (var i = 0; i < pf.PLATFORMS.length; i++) {
+                var option = document.createElement('option');
+                option.value = pf.PLATFORMS[i].id;
+                option.textContent = pf.PLATFORMS[i].name;
+                if (pf.PLATFORMS[i].id === selected) option.selected = true;
+                lPlatform.appendChild(option);
+            }
+        }
+
+        function pfSyncIconField() {
+            lIconWrap.hidden = lPlatform.value !== 'custom';
+        }
+
+        function pfOpenLink(link) {
+            pfLinkId = link ? link.id : null;
+            linkEditorTitle.textContent = link ? 'Edit link' : 'New link';
+            linkError.textContent = '';
+
+            pfFillPlatforms(link ? pfPlatformOf(link).id : 'tiktok');
+            lIconField.value = link ? link.icon : 'fas fa-link';
+            lTitle.value = link ? link.title : '';
+            lSubtitle.value = link ? link.subtitle : '';
+            lUrl.value = link ? link.url : '';
+            lFooter.checked = !!(link && link.footer);
+            lDelete.hidden = !link;
+
+            pfSyncIconField();
+            linkEditor.showModal();
+            lTitle.focus();
+        }
+
+        function pfCloseLink() {
+            if (linkEditor.open) linkEditor.close();
+            pfLinkId = null;
+            lIconWrap.hidden = true;   /* the next open decides again */
+        }
+
+        lPlatform.addEventListener('change', function () {
+            pfSyncIconField();
+            var platform = pfPlatformById(lPlatform.value);
+            if (platform.id !== 'custom' && platform.icon) lIconField.value = platform.icon;
+        });
+
+        linkForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var title = lTitle.value.trim();
+            if (!title) {
+                linkError.textContent = 'A title is required.';
+                lTitle.focus();
+                return;
+            }
+
+            var url = lUrl.value.trim();
+            if (!url) {
+                linkError.textContent = 'A link is required.';
+                lUrl.focus();
+                return;
+            }
+
+            var platform = pfPlatformById(lPlatform.value);
+            var link = {
+                id: pfLinkId || pf.uid(),
+                title: title,
+                subtitle: lSubtitle.value.trim(),
+                url: url,
+                icon: platform.id === 'custom'
+                    ? (lIconField.value.trim() || 'fas fa-link')
+                    : platform.icon,
+                accent: platform.accent,
+                footer: lFooter.checked
+            };
+
+            var isEdit = false;
+            var index = -1;
+            for (var i = 0; i < pfData.links.length; i++) {
+                if (pfData.links[i].id === pfLinkId) {
+                    index = i;
+                    isEdit = true;
+                }
+            }
+            if (index === -1) pfData.links.push(link);
+            else pfData.links[index] = link;
+
+            pfSyncIconField();
+            pfPersist();
+            pfRenderLinks();
+            pfCloseLink();
+            toast(isEdit ? 'Link saved' : 'Link added');
+        });
+
+        lDelete.addEventListener('click', function () {
+            if (!pfLinkId) return;
+            var target = null;
+            for (var i = 0; i < pfData.links.length; i++) {
+                if (pfData.links[i].id === pfLinkId) target = pfData.links[i];
+            }
+            if (!target) return;
+            if (!window.confirm('Delete "' + (target.title || 'this link') + '"?')) return;
+            pfData.links.splice(pfData.links.indexOf(target), 1);
+            pfPersist();
+            pfRenderLinks();
+            pfCloseLink();
+            toast('Link deleted');
+        });
+
+        document.getElementById('lCancel').addEventListener('click', pfCloseLink);
+        linkEditor.addEventListener('close', function () {
+            pfLinkId = null;
+        });
+
+        document.getElementById('pAddLink').addEventListener('click', function () {
+            pfOpenLink(null);
+        });
+
+        /* ── Publish / import / reset ──────────────────────────────── */
+        function pfRender() {
+            pTitle.value = pfData.title;
+            pfSyncImages();
+            pfRenderTagline();
+            pfRenderStats();
+            pfRenderLinks();
+            if (!pf.isCustomised()) {
+                pfNotice('Showing the published portfolio content. Your edits stay in this browser until you download portfolio-data.js and replace the file in the project root.', false);
+            }
+        }
+
+        document.getElementById('pDownload').addEventListener('click', function () {
+            var blob = new Blob([pf.toSource(pfData)], { type: 'text/javascript;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'portfolio-data.js';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            toast('portfolio-data.js downloaded');
+        });
+
+        document.getElementById('pImport').addEventListener('click', function () {
+            pImportFile.click();
+        });
+
+        pImportFile.addEventListener('change', function () {
+            var file = pImportFile.files && pImportFile.files[0];
+            if (!file) return;
+
+            var reader = new FileReader();
+            reader.onload = function () {
+                var imported = pf.fromSource(reader.result);
+                if (!imported) {
+                    toast('That file is not a portfolio data file', true);
+                    return;
+                }
+                if (!window.confirm('Replace the current portfolio content with the content of this file?')) return;
+                pfData = imported;
+                pfPersist();
+                pfRender();
+                toast('Portfolio content imported');
+            };
+            reader.onerror = function () {
+                toast('Could not read that file', true);
+            };
+            reader.readAsText(file);
+            pImportFile.value = '';
+        });
+
+        document.getElementById('pReset').addEventListener('click', function () {
+            if (!window.confirm('Discard every portfolio edit made in this browser and go back to the published content?')) return;
+            pf.clear();
+            pfData = pf.defaults();
+            pfRender();
+            toast('Back to the published portfolio');
+        });
+
+        /* Keyboard: Escape closes the editor dialog automatically. */
+        editor.addEventListener('close', function () {
+            editingId = null;
+        });
+
+        /* ── First render ──────────────────────────────────────────────
+           Runs last so the catalogue and the portfolio both have their
+           state and handlers in place. */
+        if (unlocked()) showPanel();
+    })();
+    </script>
+</body>
+</html>
